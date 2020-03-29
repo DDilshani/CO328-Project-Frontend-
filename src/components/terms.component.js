@@ -7,16 +7,24 @@ export default class Guide extends Component {
                 <h3>Guide to Register</h3>
 
                 <p className="forgot-password text-center">
-                    Register with the mobile platform as......... and we will send you a token. 
+                    Terms and conditions 
                 </p>
                 <br></br>
 
                 <div className="form-group">
-                    <label>Token</label>
-                    <input type="text" className="form-control" placeholder="Enter the token" />
+                    <br></br>
+                    <br></br>
+                    <div className="radio text-left">
+                        <label>
+                            <input type="radio" value="agree" /> &nbsp;Agree
+                            <br></br>
+                            <br></br>
+                            <input type="radio" value="notagree" /> &nbsp;I'm not sure
+                        </label>
+                    </div>
                 </div>
 
-                <button type="back" className="btn btn-success btn-block">Register</button>
+                <button type="back" className="btn btn-success btn-block">Place the pick up</button>
 
 
 

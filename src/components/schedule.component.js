@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 export default class Schedule extends Component {
     render() {
         return (
@@ -8,7 +7,7 @@ export default class Schedule extends Component {
 
                 <div className="form-group">
                     <label>Schedule Date</label>
-                    <input type="date" className="form-control"/>
+                    <input type="date" className="form-control" />
                 </div>
 
                 <div className="form-group">
@@ -26,6 +25,9 @@ export default class Schedule extends Component {
                     <input type="text" className="form-control" placeholder="Contact number" />
                 </div>
 
+              
+            
+
                 <button type="back" className="btn btn-success btn-block">Pick Up</button>
 
 
@@ -34,3 +36,4 @@ export default class Schedule extends Component {
         );
     }
 }
+
