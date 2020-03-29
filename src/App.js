@@ -1,6 +1,8 @@
 import React from 'react';
+
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import '../node_modules/react';
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
@@ -15,8 +17,8 @@ import IncorrectCode from "./components/incorrectCode.component";
 import ResetPW from "./components/resetPW.component";
 import Guide from "./components/guide.component";
 import Schedule from "./components/schedule.component";
-import Pickups from "./components/pickups.component";
 import Terms from "./components/terms.component";
+import Hotline from "./components/hotline.component";
 
 
 
@@ -59,10 +61,10 @@ function App() {
                 <Link className="nav-link" to={"/schedule"}>Schedule</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to={"/pickups"}>Pickups</Link>
+                <Link className="nav-link" to={"/terms"}>Terms</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to={"/terms"}>Terms</Link>
+                <Link className="nav-link" to={"/hotline"}>Hotline</Link>
               </li>
             </ul>
           </div>
@@ -83,8 +85,8 @@ function App() {
             <Route path="/resetPW" component={ResetPW} />
             <Route path="/guide" component={Guide} />
             <Route path="/schedule" component={Schedule} />
-            <Route path="/pickups" component={Pickups} />
             <Route path="/terms" component={Terms} />
+            <Route path="/hotline" component={Hotline} />
           </Switch>
         </div>
       </div>
