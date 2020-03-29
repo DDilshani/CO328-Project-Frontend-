@@ -17,16 +17,17 @@ export default class Schedule extends Component {
 
                 <div className="form-group">
                     <label>Provincial Council</label>
-                    <input type="text" className="form-control" placeholder="Select Provincial Council" />
+                    <select type="text" className="form-control" placeholder="Select Provincial Council" >
+                        <option value="">Colombo</option>
+                        <option value="">Dehiwala</option>
+                        <option value="">Galkissa</option>
+                    </select>
                 </div>
 
                 <div className="form-group">
                     <label>Contact Number</label>
                     <input type="text" className="form-control" placeholder="Contact number" />
                 </div>
-
-              
-            
 
                 <button type="back" className="btn btn-success btn-block">Pick Up</button>
 
