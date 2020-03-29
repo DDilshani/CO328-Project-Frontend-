@@ -17,9 +17,6 @@ export default class Guide extends Component {
                 </div>
 
                 <button type="back" className="btn btn-success btn-block">Register</button>
-
-
-
             </form>
         );
     }
