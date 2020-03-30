@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
-export default class RegisterSubscription extends Component {
+export default class Subscription extends Component {
+
     render() {
         return (
             <form>
@@ -14,9 +16,7 @@ export default class RegisterSubscription extends Component {
                     <input type="plan" className="form-control" placeholder="Enter your subscription plan" />
                 </div>
 
-                <button type="next" className="btn btn-success btn-block">Next</button>
-
-
+                <Link to="/fillup" className="btn btn-success btn-block">Next</Link>
 
             </form>
         );

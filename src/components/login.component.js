@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 export default class Login extends Component {
     render() {
         return (
@@ -25,14 +27,14 @@ export default class Login extends Component {
 
                 <button type="submit" className="btn btn-success btn-block">Submit</button>
                 <p className="forgot-password text-right">
-                    Forgot <a href="#">password?</a>
+                    Forgot <a href="/fogotpw">password?</a>
                 </p>
 
                 <br></br>
-                
+
 
                 <p className="register text-right">
-                    New to Zero Trash ? <a href="#">Register Here!</a>
+                    New to Zero Trash ? <a href="/register">Register Here!</a>
                 </p>
 
             </form>

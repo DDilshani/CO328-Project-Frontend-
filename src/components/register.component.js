@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
-export default class RegisterLanguage extends Component {
+export default class Register extends Component {
+   
+    
     render() {
         return (
             <form>
@@ -21,8 +24,10 @@ export default class RegisterLanguage extends Component {
                     </div>
                 </div>
 
-                <button type="next" className="btn btn-success btn-block">Next</button>
-
+                <Link to="/subscription" className="btn btn-success btn-block">Next</Link>
+                <p className="forgot-password text-right">
+                    Already registered <a href="/login">sign in?</a>
+                </p>
                 <br></br>
 
 
