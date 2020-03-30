@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
-export default class ResetPWSendCode extends Component {
+export default class Fogotpw extends Component {
     render() {
         return (
             <form>
@@ -27,7 +28,7 @@ export default class ResetPWSendCode extends Component {
                 </div>
 
                 <br></br>
-                <button type="next" className="btn btn-success btn-block">Next</button>
+                <Link to="/resetCode" className="btn btn-success btn-block">Next</Link>
 
 
 

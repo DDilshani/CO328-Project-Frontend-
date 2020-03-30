@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class ResetCode extends Component {
     render() {
@@ -18,7 +19,7 @@ export default class ResetCode extends Component {
 
 
                 <br></br>
-                <button type="next" className="btn btn-success btn-block">Next</button>
+                <Link to="/resetPw" className="btn btn-success btn-block">Next</Link>
 
 
 
