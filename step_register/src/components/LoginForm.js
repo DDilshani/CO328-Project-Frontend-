@@ -35,7 +35,7 @@ class LoginForm extends Component {
             login(customer).then(res => {
                 if (res) {
                     this.setState({invalidInput: false});
-                    this.props.history.push(`/`);
+                    window.location.href = '/';
                 }
                 else{
                     this.setState({invalidInput: true});

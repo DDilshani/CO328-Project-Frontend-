@@ -15,7 +15,11 @@ export const register = newCustomer => {
       customerType: newCustomer.customerType,
     })
     .then(response => {
-      console.log('Registered')
+      console.log('>>>' + response);
+      return response.data;
+    })
+    .catch(err => {
+      console.log(err)
     })
 }
 
@@ -26,6 +30,7 @@ export const login = newCustomer => {
       password: newCustomer.password
     })
     .then(response => {
+      console.log('>>>' + response);
       localStorage.setItem('usertoken', response.data)
       return response.data
     })
