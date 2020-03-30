@@ -5,8 +5,13 @@ import {List, ListItem} from 'material-ui/List';
 import RaisedButton from 'material-ui/RaisedButton';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
+import Alert from '@material-ui/lab/Alert';
 
 export class Confirm extends Component {
+
+    state = {
+        invalidInput: false,
+    }
 
     continue = e => {
         e.preventDefault();
@@ -26,10 +31,15 @@ export class Confirm extends Component {
             regDate: regDate
         }
         register(customer).then(res => {
-            console.log('Go to login');
+            if (res) {
+                this.setState({invalidInput: false});
+                window.location.href = '/login'
+            }
+            else{
+                console.log('Already')
+                this.setState({invalidInput: true});
+            }
         })
-
-        this.props.nextStep();
     }
 
     back = e => {
@@ -38,6 +48,10 @@ export class Confirm extends Component {
     }
 
     render() { 
+        const invalidInputMsg = (
+            <Alert style={styles.alert} severity="error">Phone Number is already Registered</Alert>
+        );
+
         const { values: {firstName, lastName, phoneNo, email, address1, address2, city} } = this.props;
 
         return ( 
@@ -78,6 +92,7 @@ export class Confirm extends Component {
                             secondaryText = {city}
                         />
                     </List>
+                    { this.state.invalidInput ? invalidInputMsg : null }
                     <RaisedButton 
                         label='Back'
                         primary={false}
@@ -108,6 +123,9 @@ const styles = {
         marginLeft: 'auto',
         marginRight: 'auto',
         marginTop: '5%'  
+    },
+    alert: {
+        marginTop: 20,
     }
 }
  
