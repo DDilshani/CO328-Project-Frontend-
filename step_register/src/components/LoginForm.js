@@ -41,7 +41,6 @@ class LoginForm extends Component {
                     this.setState({invalidInput: true});
                 }
             })
-            this.setState({invalidInput: true});
         }
         else{
             this.setState({invalidPhoneNo: true});
