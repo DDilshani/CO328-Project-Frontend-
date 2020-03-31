@@ -33,7 +33,7 @@ export class Confirm extends Component {
         register(customer).then(res => {
             if (res) {
                 this.setState({invalidInput: false});
-                window.location.href = '/login'
+                window.location.href = '/login';
             }
             else{
                 console.log('Already')
