@@ -6,8 +6,6 @@ import '../node_modules/react';
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-
 import Login from "./components/login.component";
 import Fillup from "./components/fillup.component";
 import Register from "./components/register.component";
@@ -19,7 +17,6 @@ import ResetPW from "./components/resetPW.component";
 import Guide from "./components/guide.component";
 import Schedule from "./components/schedule.component";
 import Terms from "./components/terms.component";
-import Test from "./components/test.component";
 
 function App() {
   return (<Router>
@@ -47,9 +44,6 @@ function App() {
               <li className="nav-item">
                 <Link className="nav-link" to={"/terms"}>Terms</Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to={"/test"}>Test</Link>
-              </li>
             </ul>
           </div>
         </div>
@@ -70,7 +64,6 @@ function App() {
             <Route path="/guide" component={Guide} />
             <Route path="/schedule" component={Schedule} />
             <Route path="/terms" component={Terms} />
-            <Route path="/test" component={Test} />
           </Switch>
         </div>
       </div>
