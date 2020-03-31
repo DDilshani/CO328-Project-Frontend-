@@ -1,35 +1,102 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import FormPersonalDetails from './registration_components/FormPersonalDetails';
+import FormPasswords from './registration_components/FormPasswords';
+import FormAddressDetails from './registration_components/FormAddressDetails';
+import Confirm from './registration_components/Confirm'
 
 export default class SignUp extends Component {
-    render() {
-        return (
-            <form>
-                <h3>Sign Up</h3>
-                <div className="form-group">
-                    <label>Address</label>
-                    <input type="text" className="form-control" placeholder="Enter address" />
-                </div>
+    state = { 
+        step: 1,
+        customerType:  'Regular Customer',
+        firstName: '',
+        lastName: '',
+        phoneNo: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        address1: '',
+        address2: '',
+        city: '',
+        regDate: this.formatDate(new Date().toLocaleString())
+    };
 
-                <div className="form-group">
-                    <label>Mobile Number</label>
-                    <input type="text" className="form-control" placeholder="Enter mobile number" />
-                </div>
 
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" />
-                </div>
+    formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
 
-                <div className="form-group">
-                    <label>Re-enter Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" />
-                </div>
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
 
-                <button type="submit" className="btn btn-success btn-block">Sign Up</button>
-                <p className="forgot-password text-right">
-                    Already registered <a href="#">sign in?</a>
-                </p>
-            </form>
-        );
+        return [year, month, day].join('-');
+    }
+
+    nextStep = () => {
+        const { step } = this.state;
+        this.setState({
+            step: step + 1
+        });
+    }
+
+    prevStep = () => {
+        const { step } = this.state;
+        this.setState({
+            step: step - 1
+        });
+    }
+
+    handleChange = input => e => {
+        this.setState({
+            [input]: e.target.value
+        });
+    }
+
+    render() { 
+
+        const { step } = this.state;
+        const {firstName, lastName, email, phoneNo, password, confirmPassword, address1, address2, city, regDate, customerType} = this.state;
+        const values = {firstName, lastName, email, phoneNo, password, confirmPassword, address1, address2, city, regDate, customerType};
+
+        switch(step) {
+            case 1:
+                return (
+                    <FormPersonalDetails 
+                        nextStep = {this.nextStep}
+                        handleChange = {this.handleChange}
+                        values = {values}
+                    />
+                )
+            case 2:
+                return (
+                    <FormPasswords 
+                    nextStep = {this.nextStep}
+                    prevStep = {this.prevStep}
+                    handleChange = {this.handleChange}
+                    values = {values}
+                    />
+                )
+            case 3:
+                return (
+                    <FormAddressDetails 
+                    nextStep = {this.nextStep}
+                    prevStep = {this.prevStep}
+                    handleChange = {this.handleChange}
+                    values = {values}
+                    />
+                )
+            case 4:
+                return (
+                    <Confirm 
+                    nextStep = {this.nextStep}
+                    prevStep = {this.prevStep}
+                    values = {values}
+                    />
+                )
+        }
     }
 }
+ 
