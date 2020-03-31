@@ -1,5 +1,5 @@
 import React from 'react';
-
+import 'bootstrap/dist/css/bootstrap.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import '../node_modules/react';
@@ -19,13 +19,14 @@ import ResetPW from "./components/resetPW.component";
 import Guide from "./components/guide.component";
 import Schedule from "./components/schedule.component";
 import Terms from "./components/terms.component";
+import Test from "./components/test.component";
 
 function App() {
   return (<Router>
     <div className="App">
       <nav className="navbar navbar-expand-lg navbar-light fixed-top">
         <div className="container">
-          <Link className="navbar-brand" to={"/sign-in"}>positronX.io</Link>
+          <Link className="navbar-brand" to={"/sign-in"}>Zero Trash</Link>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
@@ -45,6 +46,9 @@ function App() {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to={"/terms"}>Terms</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to={"/test"}>Test</Link>
               </li>
             </ul>
           </div>
@@ -66,6 +70,7 @@ function App() {
             <Route path="/guide" component={Guide} />
             <Route path="/schedule" component={Schedule} />
             <Route path="/terms" component={Terms} />
+            <Route path="/test" component={Test} />
           </Switch>
         </div>
       </div>

@@ -16,10 +16,10 @@ export default class Register extends Component {
                     <br></br>
                     <div className="radio">
                         <label>
-                            <input type="radio" value="sinhala" /> &nbsp;Sinhala
+                            <input name="sinhala" type="radio" value="sinhala" checked={true} /> &nbsp;Sinhala
                             <br></br>
                             <br></br>
-                            <input type="radio" value="english" /> &nbsp;English
+                            <input name="english" type="radio" value="english" /> &nbsp;English
                         </label>
                     </div>
                 </div>
