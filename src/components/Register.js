@@ -4,7 +4,7 @@ import FormPasswords from './registration_components/FormPasswords';
 import FormAddressDetails from './registration_components/FormAddressDetails';
 import Confirm from './registration_components/Confirm'
 
-export default class SignUp extends Component {
+class Register extends Component {
     state = { 
         step: 1,
         customerType:  'Regular Customer',
@@ -99,4 +99,6 @@ export default class SignUp extends Component {
         }
     }
 }
+
+export default Register;
  

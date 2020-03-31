@@ -102,22 +102,25 @@ export class FormPasswords extends Component {
         )
 
         return (
+
+            <div className='card'>
             
-            <form onSubmit = {this.continue}>
-                <h3>Sign Up</h3>
+                <form onSubmit = {this.continue}>
+                    <h3>Sign Up</h3>
 
-                {this.state.validPassword? validPasswordClass : invalidPasswordClass}
+                    {this.state.validPassword? validPasswordClass : invalidPasswordClass}
 
-                {this.state.validConfirmPassword? validConfirmPasswordClass : invalidConfirmPasswordClass}
+                    {this.state.validConfirmPassword? validConfirmPasswordClass : invalidConfirmPasswordClass}
 
-                <button type="submit" className="btn btn-success btn-block">Continue</button>
-                <button onClick = {this.back} className="btn btn-light btn-block">Back</button>
+                    <button type="submit" className="btn btn-success btn-block">Continue</button>
+                    <button onClick = {this.back} className="btn btn-light btn-block">Back</button>
 
-                <br></br>
+                    <br></br>
 
-                <p className="login text-right">Already have an account ? <a href="#">Login Here!</a></p>
+                    <p className="login text-right">Already have an account ? <a href="#">Login Here!</a></p>
 
-            </form>
+                </form>
+            </div>
         );
     }
 }

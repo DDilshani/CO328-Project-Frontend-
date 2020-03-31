@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -18,12 +18,12 @@ import Guide from "./components/guide.component";
 import Schedule from "./components/schedule.component";
 import Terms from "./components/terms.component";
 import Hotline from "./components/hotline.component";
-import Navigation from './components/layout/Navigation';
+import Navbar from './components/layout/Navbar';
 
 function App() {
   return (<Router>
     <div className="App">
-      <Navigation></Navigation>
+      <Navbar />
       
       <div className="auth-wrapper">
         <div className="auth-inner">
@@ -46,6 +46,33 @@ function App() {
       </div>
     </div></Router>
   );
+}
+
+export default App;*/
+
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
+import Navbar from './components/layout/Navbar'
+import Login from './components/Login'
+import Register from './components/Register'
+import Landing from './components/Landing'
+
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <Navbar />
+          <Route exact path="/" component={Landing} />
+          <div className="container">
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+          </div>
+        </div>
+      </Router>
+    )
+  }
 }
 
 export default App;

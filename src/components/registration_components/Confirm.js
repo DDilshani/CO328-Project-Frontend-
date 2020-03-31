@@ -53,36 +53,39 @@ export class Confirm extends Component {
         const { values: {firstName, lastName, phoneNo, email, address1, address2, city} } = this.props;
 
         return (
+
+            <div className='card'>
             
-            <form onSubmit = {this.continue}>
-                <h3>Confirm</h3>
+                <form onSubmit = {this.continue}>
+                    <h3>Confirm</h3>
 
-                <div className="form-group">
-                    <label>Name</label>
-                    <input type="text"  value = {firstName + " " + lastName} className="form-control" readOnly />
-                </div>
-                <div className="form-group">
-                    <label>Email</label>
-                    <input type="email"  value = {email} className="form-control" readOnly />
-                </div>
-                <div className="form-group">
-                    <label>Phone Number</label>
-                    <input type="text"  value = {phoneNo} className="form-control" readOnly />
-                </div>
-                <div className="form-group">
-                    <label>Address</label>
-                    <input type="text"  value = {address1+ ", "+address2 + ", " + city} className="form-control" readOnly />
-                </div>
+                    <div className="form-group">
+                        <label>Name</label>
+                        <input type="text"  value = {firstName + " " + lastName} className="form-control" readOnly />
+                    </div>
+                    <div className="form-group">
+                        <label>Email</label>
+                        <input type="email"  value = {email} className="form-control" readOnly />
+                    </div>
+                    <div className="form-group">
+                        <label>Phone Number</label>
+                        <input type="text"  value = {phoneNo} className="form-control" readOnly />
+                    </div>
+                    <div className="form-group">
+                        <label>Address</label>
+                        <input type="text"  value = {address1+ ", "+address2 + ", " + city} className="form-control" readOnly />
+                    </div>
 
-                {this.state.validInput? null : alertMsg}
+                    {this.state.validInput? null : alertMsg}
 
-                <button type="submit" className="btn btn-success btn-block">Submit</button>
-                <button onClick = {this.back} className="btn btn-light btn-block">Back</button>
+                    <button type="submit" className="btn btn-success btn-block">Submit</button>
+                    <button onClick = {this.back} className="btn btn-light btn-block">Back</button>
 
-                <br></br>
-                <p className="login text-right">Already have an account ? <a href="#">Login Here!</a></p>
-    
-            </form>
+                    <br></br>
+                    <p className="login text-right">Already have an account ? <a href="#">Login Here!</a></p>
+        
+                </form>
+            </div>
         );
     }
 }
