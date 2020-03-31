@@ -102,29 +102,30 @@ export class FormPersonalDetails extends Component {
         )
 
         return (
-            
-            <form onSubmit = {this.continue}>
-                <h3>Sign Up</h3>
+            <div className='card'>
+                <form onSubmit = {this.continue}>
+                    <h3>Sign Up</h3>
 
-                <div className="form-group">
-                    <label>First Name</label>
-                    <input type="text"  value = {values.firstName} onChange = {handleChange('firstName')} className="form-control" placeholder="Enter first name" required />
-                </div>
+                    <div className="form-group">
+                        <label>First Name</label>
+                        <input type="text"  value = {values.firstName} onChange = {handleChange('firstName')} className="form-control" placeholder="Enter first name" required />
+                    </div>
 
-                <div className="form-group">
-                    <label>Last Name</label>
-                    <input type="text" value = {values.lastName} onChange = {handleChange('lastName')} className="form-control" placeholder="Enter last name" required />
-                </div>
+                    <div className="form-group">
+                        <label>Last Name</label>
+                        <input type="text" value = {values.lastName} onChange = {handleChange('lastName')} className="form-control" placeholder="Enter last name" required />
+                    </div>
 
-                {this.state.validEmail? validEmailClass : invalidEmailClass}
+                    {this.state.validEmail? validEmailClass : invalidEmailClass}
 
-                {this.state.validPhoneNo? validPhoneNoClass : invalidPhoneNoClass}
+                    {this.state.validPhoneNo? validPhoneNoClass : invalidPhoneNoClass}
 
-                <button type="submit" className="btn btn-success btn-block">Continue</button>
-                <br></br>
-                <p className="login text-right">Already have an account ? <a href="#">Login Here!</a></p>
+                    <button type="submit" className="btn btn-success btn-block">Continue</button>
+                    <br></br>
+                    <p className="login text-right">Already have an account ? <a href="#">Login Here!</a></p>
 
-            </form>
+                </form>
+            </div>
         );
     }
 }

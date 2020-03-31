@@ -33,9 +33,7 @@ export const login = input => {
       password: newCustomer.password
     })
     .then(response => {
-        if(rememberMe){
-            localStorage.setItem('usertoken', response.data);
-        }
+        localStorage.setItem('usertoken', response.data);
         return response.data
     })
     .catch(err => {
