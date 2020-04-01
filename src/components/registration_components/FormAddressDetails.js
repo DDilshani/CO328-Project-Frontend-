@@ -28,8 +28,9 @@ export class FormAddressDetails extends Component {
             <div className='card'>
 
                 <form onSubmit = {this.continue}>
-                    <h3>Sign Up</h3>
-                    
+                <div className = 'header'>
+                        <h3>Sign Up</h3>
+                    </div>
                     <div className="form-group">
                         <label>Address 1</label>
                         <input type="text"  value = {values.address1} onChange = {handleChange('address1')} className="form-control" placeholder="address 1" required />

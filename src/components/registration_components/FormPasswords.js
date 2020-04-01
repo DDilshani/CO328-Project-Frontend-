@@ -106,7 +106,9 @@ export class FormPasswords extends Component {
             <div className='card'>
             
                 <form onSubmit = {this.continue}>
-                    <h3>Sign Up</h3>
+                <div className = 'header'>
+                        <h3>Sign Up</h3>
+                    </div>
 
                     {this.state.validPassword? validPasswordClass : invalidPasswordClass}
 
