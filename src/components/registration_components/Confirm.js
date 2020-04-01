@@ -57,7 +57,9 @@ export class Confirm extends Component {
             <div className='card'>
             
                 <form onSubmit = {this.continue}>
-                    <h3>Confirm</h3>
+                <div className = 'header'>
+                        <h3>Sign Up</h3>
+                    </div>
 
                     <div className="form-group">
                         <label>Name</label>

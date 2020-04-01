@@ -53,7 +53,7 @@ export default App;*/
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-import Navbar from './components/layout/Navbar'
+import Navigationbar from './components/layout/Navigationbar'
 import Login from './components/Login'
 import Register from './components/Register'
 import Landing from './components/Landing'
@@ -63,7 +63,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Navbar />
+          <Navigationbar />
           <Route exact path="/" component={Landing} />
           <div className="container">
             <Route exact path="/register" component={Register} />

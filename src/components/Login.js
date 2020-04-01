@@ -69,10 +69,11 @@ class Login extends Component {
         )
 
         return (
-            <div class = 'card'>
+            <div className = 'card'>
                 <form onSubmit = {this.continue}>
-                    <h3>Sign In</h3>
-
+                    <div className = 'header'>
+                        <h3>Sign In</h3>
+                    </div>
                     <div className="form-group">
                         <label>Mobile number or Email</label>
                         <input type="text"  value = {values.username} onChange = {this.handleChange('username')} className="form-control" placeholder="Enter mobile number or email" required />
@@ -92,14 +93,12 @@ class Login extends Component {
                     {values.validInput? null : alertMsg}
                     <button type="submit" className="btn btn-success btn-block">Submit</button>
                     <p className="forgot-password text-right">
-                        Forgot <a href="#">password?</a>
+                        forgot <a href="#">password?</a>
                     </p>
-
-                    <br></br>
                     
 
                     <p className="register text-right">
-                        New to Zero Trash ? <a href="#">Register Here!</a>
+                        new to Zero Trash ? <a href="/register">Register Here!</a>
                     </p>
 
                 </form>

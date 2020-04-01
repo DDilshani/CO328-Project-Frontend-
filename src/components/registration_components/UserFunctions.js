@@ -41,4 +41,3 @@ export const login = input => {
       console.log(err)
     })
 }
-
