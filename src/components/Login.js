@@ -4,7 +4,7 @@ import { login } from './registration_components/UserFunctions';
 class Login extends Component {
 
     state = { 
-        phoneNo: '',
+        username: '',
         password: '',
         validInput: true,
         rememberMe: false,
@@ -20,10 +20,23 @@ class Login extends Component {
     continue = e => {
         e.preventDefault();
 
-        const {phoneNo, password, rememberMe } = this.state;
-        const customer = {
-            phoneNo: phoneNo,
-            password: password
+        const {username, password, rememberMe } = this.state;
+        let customer = {};
+        if(Number.isInteger(parseInt(username))){
+            console.log('Number is integer')
+            customer = {
+                phoneNo: username,
+                email: 'null',
+                password: password
+            }
+        }
+        else{
+            console.log('Number is not integer')
+            customer = {
+                phoneNo: 'null',
+                email: username,
+                password: password
+            }
         }
         login({customer,rememberMe}).then(res => {
             if (res) {
@@ -61,8 +74,8 @@ class Login extends Component {
                     <h3>Sign In</h3>
 
                     <div className="form-group">
-                        <label>Mobile number</label>
-                        <input type="text"  value = {values.phoneNo} onChange = {this.handleChange('phoneNo')} className="form-control" placeholder="Enter mobile number" required />
+                        <label>Mobile number or Email</label>
+                        <input type="text"  value = {values.username} onChange = {this.handleChange('username')} className="form-control" placeholder="Enter mobile number or email" required />
                     </div>
 
                     <div className="form-group">

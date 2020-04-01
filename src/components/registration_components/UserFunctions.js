@@ -30,6 +30,7 @@ export const login = input => {
     return axios
     .post('customers/login', {
       phoneNo: newCustomer.phoneNo,
+      email: newCustomer.email,
       password: newCustomer.password
     })
     .then(response => {
@@ -40,3 +41,4 @@ export const login = input => {
       console.log(err)
     })
 }
+
