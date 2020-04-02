@@ -69,7 +69,7 @@ class Login extends Component {
         )
 
         return (
-            <div className = 'card'>
+            <div className = 'card card-login'>
                 <form onSubmit = {this.continue}>
                     <div className = 'header'>
                         <h3>Sign In</h3>
@@ -93,12 +93,12 @@ class Login extends Component {
                     {values.validInput? null : alertMsg}
                     <button type="submit" className="btn btn-success btn-block">Submit</button>
                     <p className="forgot-password text-right">
-                        forgot <a href="#">password?</a>
+                        forgot&ensp;<a href="#">password?</a>
                     </p>
                     
 
                     <p className="register text-right">
-                        new to Zero Trash ? <a href="/register">Register Here!</a>
+                        new to Zero Trash?&ensp;<a href="/register">Register Here!</a>
                     </p>
 
                 </form>
