@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Button, Form,Card } from 'react-bootstrap';
+
 
 export class FormPasswords extends Component {
 
@@ -61,61 +63,56 @@ export class FormPasswords extends Component {
     render() {
 
         const { values,handleChange } = this.props;
+        const {validPassword, validConfirmPassword } = this.state;
 
-
-        const validPasswordClass = (
-            <div className="form-group">
-                <label>Password</label>
-                <input type="password" value = {values.password} onChange = {handleChange('password')} className = "form-control" placeholder="Enter password" required />
-            </div>
+        const invalidPasswordMsg = (
+            <Form.Text className="text-muted text-alert">
+                Password must contain 7 to 15 characters including atleast 1 numeric
+                character and atleast 1 special character.
+            </Form.Text>
         )
 
-        const invalidPasswordClass = (
-            <div className="form-group">
-                <label>Password</label>
-                <input type="password" value = {values.password} onChange = {handleChange('password')} className = "form-control is-invalid" placeholder="Enter password" required />
-                <span class="error text-danger">Invalid Password</span>
-            </div>
+        const invalidConfirmPasswordMsg = (
+            <Form.Text className="text-muted text-alert">
+                Passwords do not match.
+            </Form.Text>
         )
 
-        const validConfirmPasswordClass = (
-            <div className="form-group">
-                <label>Confirm password</label>
-                <input type="password" value = {values.confirmPassword} onChange = {handleChange('confirmPassword')} className="form-control" placeholder="Confirm Password" required />
-            </div>
-        )
+        const invalidClass = 'is-invalid';
 
-
-        const invalidConfirmPasswordClass = (
-            <div className="form-group">
-                <label>Confirm password</label>
-                <input type="password" value = {values.confirmPassword} onChange = {handleChange('confirmPassword')} className="form-control is-invalid" placeholder="Confirm Password" required />
-                <span class="error text-danger">Passwords do not match</span>
-            </div>
-        )
+        
 
         return (
 
-            <div className='card'>
-            
-                <form onSubmit = {this.continue}>
-                <div className = 'header'>
-                        <h3>Sign Up</h3>
-                    </div>
-
-                    {this.state.validPassword? validPasswordClass : invalidPasswordClass}
-
-                    {this.state.validConfirmPassword? validConfirmPasswordClass : invalidConfirmPasswordClass}
-
-                    <button type="submit" className="btn btn-success btn-block">Continue</button>
-                    <button onClick = {this.back} className="btn btn-light btn-block">Back</button>
-
-                    <br></br>
-
-                    <p className="login text-right">Already have an account?&ensp;<a href="#">Login Here!</a></p>
-
-                </form>
-            </div>
+            <Card>
+                <Form onSubmit = {e => this.continue(e)}>
+                    <Card.Body>
+                        <Card.Title className='text-center'>
+                        Sign Up
+                        </Card.Title>
+                        <Form.Group>
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" className = {validPassword ? null : invalidClass} value = {values.password} onChange = {handleChange('password')} placeholder="Enter Password" required/>
+                            {validPassword ? null : invalidPasswordMsg}
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Confirm Password</Form.Label>
+                            <Form.Control type="password" className = {validPassword ? null : invalidClass} value = {values.confirmPassword} onChange = {handleChange('confirmPassword')} placeholder="Confirm Password" required />
+                            {validConfirmPassword ? null : invalidConfirmPasswordMsg}
+                        </Form.Group>
+                        <br />
+                        <Button variant="success" type="submit" block>
+                            Continue
+                        </Button>
+                        <Button variant="light" onClick = {this.back} block>
+                            Back
+                        </Button>
+                        <Card.Text>
+                            Already have an account?&ensp;<a href="#">Login Here!</a>
+                        </Card.Text>
+                    </Card.Body>
+                </Form>
+            </Card>
         );
     }
 }

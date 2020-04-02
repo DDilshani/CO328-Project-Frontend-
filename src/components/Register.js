@@ -61,8 +61,8 @@ class Register extends Component {
     render() { 
 
         const { step } = this.state;
-        const {firstName, lastName, email, phoneNo, password, confirmPassword, address1, address2, city, regDate, customerType} = this.state;
-        const values = {firstName, lastName, email, phoneNo, password, confirmPassword, address1, address2, city, regDate, customerType};
+        const {firstName, lastName, email, phoneNo, password, confirmPassword, address1, address2, city, regDate, customerType, language} = this.state;
+        const values = {firstName, lastName, email, phoneNo, password, confirmPassword, address1, address2, city, regDate, customerType, language};
 
         switch(step) {
             case 1:
