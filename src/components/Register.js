@@ -3,10 +3,13 @@ import FormPersonalDetails from './registration_components/FormPersonalDetails';
 import FormPasswords from './registration_components/FormPasswords';
 import FormAddressDetails from './registration_components/FormAddressDetails';
 import Confirm from './registration_components/Confirm'
+import FormLanguage from './registration_components/FormLanguage'
+import FormDevVerification from './registration_components/FormDevVerification'
 
 class Register extends Component {
     state = { 
         step: 1,
+        language: '',
         customerType:  'Regular Customer',
         firstName: '',
         lastName: '',
@@ -48,7 +51,7 @@ class Register extends Component {
             step: step - 1
         });
     }
-
+    
     handleChange = input => e => {
         this.setState({
             [input]: e.target.value
@@ -64,13 +67,30 @@ class Register extends Component {
         switch(step) {
             case 1:
                 return (
+                    <FormLanguage 
+                        nextStep = {this.nextStep}
+                        handleChange = {this.handleChange}
+                    />
+                )
+            case 2:
+                return (
                     <FormPersonalDetails 
                         nextStep = {this.nextStep}
+                        prevStep = {this.prevStep}
                         handleChange = {this.handleChange}
                         values = {values}
                     />
                 )
-            case 2:
+            case 3:
+                return (
+                    <FormDevVerification 
+                        nextStep = {this.nextStep}
+                        prevStep = {this.prevStep}
+                        handleChange = {this.handleChange}
+                        values = {values}
+                    />
+                );
+            case 4:
                 return (
                     <FormPasswords 
                     nextStep = {this.nextStep}
@@ -79,7 +99,7 @@ class Register extends Component {
                     values = {values}
                     />
                 )
-            case 3:
+            case 5:
                 return (
                     <FormAddressDetails 
                     nextStep = {this.nextStep}
@@ -88,7 +108,7 @@ class Register extends Component {
                     values = {values}
                     />
                 )
-            case 4:
+            case 6:
                 return (
                     <Confirm 
                     nextStep = {this.nextStep}

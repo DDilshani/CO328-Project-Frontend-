@@ -3,7 +3,6 @@
   box-sizing: border-box;
 }
 body {
-  background: #5cb85c !important;
   min-height: 100vh;
   display: flex;
   font-weight: 400;
@@ -18,6 +17,19 @@ h1,h2,h3,h4,h5,h6,label,span {
 body, html, .App, #root, .auth-wrapper {
   width: 100%;
   height: 100%;
+}
+
+.navbar-brand:hover {
+  font-size: 20px;
+}
+
+.nav-link {
+  font-size: 20px;
+}
+
+.nav-link:hover {
+  color: white;
+  font-size: 20px;
 }
 /*
 .navbar-light {
@@ -92,19 +104,37 @@ a:hover {
 
 .card {
   margin-top: 5%;
+  margin-bottom: 5%;
   margin-left: auto;
   margin-right: auto;
   max-width: 400px;
-  padding: 20px;
-  padding-bottom: 5px;
 }
 
 .header {
   text-align: center;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
 }
 .card p{
+  display:flex;
+  justify-content:center;
   font-size: 15px;
-  margin-top: 10px;
-  text-align: left;
+}
+
+.btn-block-language {
+  display:flex;
+  justify-content:center;
+  margin-top: 5%;
+  margin-bottom: 10%;
+}
+.btn-block-language .btn {
+  width: 150px;
+  height: 150px;
+}
+
+.btn-block-language .btn:first-child{
+  margin-right: 20px;
+}
+
+.card-login .btn {
+  margin-bottom: 10px;
 }

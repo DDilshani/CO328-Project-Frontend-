@@ -7,13 +7,6 @@ export class FormPersonalDetails extends Component {
         validPhoneNo: true,
     }
 
-    handleChange = input => e => {
-        this.setState({
-            [input]: e.target.value
-        });
-
-    }
-
     continue = e => {
         e.preventDefault();
 
@@ -45,6 +38,11 @@ export class FormPersonalDetails extends Component {
         if(allow){
             this.props.nextStep();
         }
+    }
+
+    back = e => {
+        e.preventDefault();
+        this.props.prevStep();
     }
 
     validatePhoneNo(phoneNo) {
@@ -123,8 +121,10 @@ export class FormPersonalDetails extends Component {
                     {this.state.validPhoneNo? validPhoneNoClass : invalidPhoneNoClass}
 
                     <button type="submit" className="btn btn-success btn-block">Continue</button>
+                    <button onClick = {this.back} className="btn btn-light btn-block">Back</button>
+                    
                     <br></br>
-                    <p className="login text-right">Already have an account ? <a href="#">Login Here!</a></p>
+                    <p className="login text-right">Already have an account?&ensp;<a href="#">Login Here!</a></p>
 
                 </form>
             </div>

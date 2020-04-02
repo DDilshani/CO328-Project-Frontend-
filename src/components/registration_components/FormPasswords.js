@@ -7,13 +7,6 @@ export class FormPasswords extends Component {
         validConfirmPassword: true
     }
 
-    handleChange = input => e => {
-        this.setState({
-            [input]: e.target.value
-        });
-
-    }
-
     continue = e => {
         e.preventDefault();
 
@@ -119,7 +112,7 @@ export class FormPasswords extends Component {
 
                     <br></br>
 
-                    <p className="login text-right">Already have an account ? <a href="#">Login Here!</a></p>
+                    <p className="login text-right">Already have an account?&ensp;<a href="#">Login Here!</a></p>
 
                 </form>
             </div>
