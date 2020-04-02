@@ -6,7 +6,6 @@ class FormDevVerification extends Component {
     state = {  
         token: '',
         validInput: true,
-        validPhoneNo: true,
         validToken: true
     }
 
@@ -29,14 +28,14 @@ class FormDevVerification extends Component {
                 console.log(res.statusCode);
                 let statusCode = res.statusCode;
                 if(statusCode == 'S1000'){
-                    this.setState({validToken: true, validPhoneNo: true, validInput : true});
+                    this.setState({validToken: true, validInput : true});
                     this.props.nextStep();
                 }
                 else if(statusCode == 'E3002'){
-                    this.setState({validToken: false, validPhoneNo: true, validInput : true});
+                    this.setState({validToken: false, validInput : true});
                 }
                 else{
-                    this.setState({validToken: true, validPhoneNo: true, validInput : false});
+                    this.setState({validToken: true, validInput : false});
                 }
             }
             else{
@@ -51,18 +50,11 @@ class FormDevVerification extends Component {
     }
 
     render() { 
-        const {values,handleChange} = this.props;
-        const { validInput, validPhoneNo, validToken } = this.state;
+        const { validInput, validToken } = this.state;
 
         const invalidInputMsg = (
             <Alert variant='danger'>
                 Server Error. Please try again later!
-            </Alert>
-        )
-
-        const invalidPhoneNoMsg = (
-            <Alert variant='danger'>
-                Device is not registered on the system!
             </Alert>
         )
 
@@ -80,8 +72,7 @@ class FormDevVerification extends Component {
                         <Card.Title className='text-center'>
                             Mobile number verification
                         </Card.Title>
-                        <br />
-                        <Form.Group controlId="forDeviceVerification">
+                        <Form.Group>
                             <Form.Label>Device Verification Code</Form.Label>
                             <Form.Control type="text" placeholder="" value={this.state.token} onChange = {this.handleChange('token')} required/>
                             <Form.Text className="text-muted">
@@ -92,7 +83,7 @@ class FormDevVerification extends Component {
                         <Card.Text>
                         The device verification code has been sent to you when you registered your mobile number using ssd.
                         </Card.Text>
-                        {validInput? validPhoneNo? validToken? null : invalidTokenMsg : invalidPhoneNoMsg : invalidInputMsg}
+                        {validInput? (validToken? null : invalidTokenMsg) : invalidInputMsg}
                         <Button variant="success" type="submit" block>
                             Verify & Continue
                         </Button>

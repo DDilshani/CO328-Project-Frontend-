@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Button, Form,Card } from 'react-bootstrap';
 
 export class FormAddressDetails extends Component {
 
@@ -18,36 +19,37 @@ export class FormAddressDetails extends Component {
         const { values,handleChange } = this.props;
 
         return (
-            
-            <div className='card'>
-
-                <form onSubmit = {this.continue}>
-                <div className = 'header'>
-                        <h3>Sign Up</h3>
-                    </div>
-                    <div className="form-group">
-                        <label>Address 1</label>
-                        <input type="text"  value = {values.address1} onChange = {handleChange('address1')} className="form-control" placeholder="address 1" required />
-                    </div>
-
-                    <div className="form-group">
-                        <label>Address 2</label>
-                        <input type="text" value = {values.address2} onChange = {handleChange('address2')} className="form-control" placeholder="address 2" required />
-                    </div>
-
-                    <div className="form-group">
-                        <label>City</label>
-                        <input type="text" value = {values.city} onChange = {handleChange('city')} className="form-control" placeholder="City" required />
-                    </div>
-
-                    <button type="submit" className="btn btn-success btn-block">Continue</button>
-                    <button onClick = {this.back} className="btn btn-light btn-block">Back</button>
-
-                    <br></br>
-                    <p className="login text-right">Already have an account?&ensp;<a href="#">Login Here!</a></p>
-
-                </form>
-            </div>
+            <Card>
+                <Form onSubmit = {e => this.continue(e)}>
+                    <Card.Body>
+                        <Card.Title className='text-center'>
+                        Sign Up
+                        </Card.Title>
+                        <Form.Group>
+                            <Form.Label>Address 1</Form.Label>
+                            <Form.Control type="text"  value = {values.address1} onChange = {handleChange('address1')} placeholder="address 1" required/>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Address 2</Form.Label>
+                            <Form.Control type="text"  value = {values.address2} onChange = {handleChange('address2')} placeholder="address 2" required />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>City</Form.Label>
+                            <Form.Control type="text" value = {values.city} onChange = {handleChange('city')} placeholder="City" required/>
+                        </Form.Group>
+                        <br />
+                        <Button variant="success" type="submit" block>
+                            Continue
+                        </Button>
+                        <Button variant="light" onClick = {this.back} block>
+                            Back
+                        </Button>
+                        <Card.Text>
+                            Already have an account?&ensp;<a href="#">Login Here!</a>
+                        </Card.Text>
+                    </Card.Body>
+                </Form>
+            </Card>
         );
     }
 }

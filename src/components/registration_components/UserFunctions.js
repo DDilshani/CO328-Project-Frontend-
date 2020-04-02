@@ -13,9 +13,9 @@ export const register = newCustomer => {
       regDate: newCustomer.regDate,
       password: newCustomer.password,
       customerType: newCustomer.customerType,
+      language: newCustomer.language,
     })
     .then(response => {
-      console.log('>>>' + response);
       return response.data;
     })
     .catch(err => {
@@ -34,7 +34,7 @@ export const login = input => {
       password: newCustomer.password
     })
     .then(response => {
-        localStorage.setItem('usertoken', response.data);
+        localStorage.setItem('usertoken', response.data.sessionToken);
         return response.data
     })
     .catch(err => {

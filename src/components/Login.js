@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { login } from './registration_components/UserFunctions';
+import { Button, Form,Card,Alert } from 'react-bootstrap';
 
 class Login extends Component {
 
@@ -7,6 +8,7 @@ class Login extends Component {
         username: '',
         password: '',
         validInput: true,
+        validServer: true,
         rememberMe: false,
     }
 
@@ -40,11 +42,24 @@ class Login extends Component {
         }
         login({customer,rememberMe}).then(res => {
             if (res) {
-                this.setState({validInput: true});
-                window.location.href = '/';
+                let statusCode = res.statusCode;
+                console.log(statusCode);
+                if(statusCode == 'S2000'){
+                    console.log('Success')
+                    this.setState({validInput: true, validServer :true}); 
+                    window.location.href = '/';
+                }
+                else if(statusCode == 'E4001'){
+                    console.log('Wrong')
+                    this.setState({validInput: false, validServer : true}); 
+                }
+                else if(statusCode == 'E5000' || statusCode == 'E5003'){
+                    console.log('Error')
+                    this.setState({validInput: true, validServer : false}); 
+                }
             }
             else{
-                this.setState({validInput: false});
+                this.setState({validServer: false});
             }
         })
     }
@@ -62,47 +77,47 @@ class Login extends Component {
     render() {
         const values = this.state; 
 
-        const alertMsg = (
+        const invalidInputMsg = (
             <div class="alert alert-danger" role="alert">
             Invalid mobile number or password!
             </div>
         )
+        const invalidServerMsg = (
+            <Alert variant='danger'>
+                Database error!
+            </Alert>
+        )
 
         return (
-            <div className = 'card card-login'>
-                <form onSubmit = {this.continue}>
-                    <div className = 'header'>
-                        <h3>Sign In</h3>
-                    </div>
-                    <div className="form-group">
-                        <label>Mobile number or Email</label>
-                        <input type="text"  value = {values.username} onChange = {this.handleChange('username')} className="form-control" placeholder="Enter mobile number or email" required />
-                    </div>
-
-                    <div className="form-group">
-                        <label>Password</label>
-                        <input type="password" value = {values.password} onChange = {this.handleChange('password')} className="form-control" placeholder="Enter password" required />
-                    </div>
-
-                    <div className="form-group">
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" onChange = {this.radioButtonChange} className="custom-control-input" id="customCheck1" />
-                            <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-                        </div>
-                    </div>
-                    {values.validInput? null : alertMsg}
-                    <button type="submit" className="btn btn-success btn-block">Submit</button>
-                    <p className="forgot-password text-right">
+            
+        <Card>
+            <Form onSubmit = {e => this.continue(e)}>
+                <Card.Body>
+                    <Card.Title className='text-center'>
+                    Sign In
+                    </Card.Title>
+                    <Form.Group >
+                        <Form.Label>Mobile number or Email</Form.Label>
+                        <Form.Control type="text"  value = {values.username} onChange = {this.handleChange('username')} placeholder="Enter mobile number or email" required/>
+                    </Form.Group>
+                    <Form.Group >
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" value = {values.password} onChange = {this.handleChange('password')} placeholder="Enter password" required />
+                    </Form.Group>
+                    <br />
+                    {values.validServer? (values.validInput? null : invalidInputMsg) : invalidServerMsg}
+                    <Button variant="success" type="submit" block>
+                        Continue
+                    </Button>
+                    <Card.Text>
                         forgot&ensp;<a href="#">password?</a>
-                    </p>
-                    
-
-                    <p className="register text-right">
+                    </Card.Text>
+                    <Card.Text>
                         new to Zero Trash?&ensp;<a href="/register">Register Here!</a>
-                    </p>
-
-                </form>
-            </div>
+                    </Card.Text>
+                </Card.Body>
+            </Form>
+        </Card>
         );
     }
 }

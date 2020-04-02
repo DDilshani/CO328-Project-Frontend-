@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Button, Form,Card } from 'react-bootstrap';
 
 export class FormPersonalDetails extends Component {
 
@@ -67,67 +68,60 @@ export class FormPersonalDetails extends Component {
     render() {
 
         const { values,handleChange } = this.props;
+        const {validEmail, validPhoneNo} = this.state;
 
-
-        const validEmailClass = (
-            <div className="form-group">
-                <label>Email</label>
-                <input type="text" value = {values.email} onChange = {handleChange('email')} className = "form-control" placeholder="Enter email" required />
-            </div>
+        const invalidPhoneNoMsg = (
+            <Form.Text className="text-muted text-alert">
+                Invalid phone No
+            </Form.Text>
+        )
+        const invalidEmailMsg = (
+            <Form.Text className="text-muted text-alert">
+                Invalid email address
+            </Form.Text>
         )
 
-        const invalidEmailClass = (
-            <div className="form-group">
-                <label>Email</label>
-                <input type="text" value = {values.email} onChange = {handleChange('email')} className = "form-control is-invalid" placeholder="Enter email" required />
-                <span class="error text-danger">Invalid email address</span>
-            </div>
-        )
-
-        const validPhoneNoClass = (
-            <div className="form-group">
-                <label>Mobile Number</label>
-                <input type="text" value = {values.phoneNo} onChange = {handleChange('phoneNo')} className="form-control" placeholder="Enter mobile number" required />
-            </div>
-        )
-
-        const invalidPhoneNoClass = (
-            <div className="form-group">
-                <label>Mobile Number</label>
-                <input type="text" value = {values.phoneNo} onChange = {handleChange('phoneNo')} className="form-control is-invalid" placeholder="Enter mobile number" required />
-                <span class="error text-danger">Invalid phone number</span>
-            </div>
-        )
-
+        const invalidClass = 'is-invalid';
+ 
         return (
-            <div className='card'>
-                <form onSubmit = {this.continue}>
-                <div className = 'header'>
-                        <h3>Sign Up</h3>
-                    </div>
-
-                    <div className="form-group">
-                        <label>First Name</label>
-                        <input type="text"  value = {values.firstName} onChange = {handleChange('firstName')} className="form-control" placeholder="Enter first name" required />
-                    </div>
-
-                    <div className="form-group">
-                        <label>Last Name</label>
-                        <input type="text" value = {values.lastName} onChange = {handleChange('lastName')} className="form-control" placeholder="Enter last name" required />
-                    </div>
-
-                    {this.state.validEmail? validEmailClass : invalidEmailClass}
-
-                    {this.state.validPhoneNo? validPhoneNoClass : invalidPhoneNoClass}
-
-                    <button type="submit" className="btn btn-success btn-block">Continue</button>
-                    <button onClick = {this.back} className="btn btn-light btn-block">Back</button>
-                    
-                    <br></br>
-                    <p className="login text-right">Already have an account?&ensp;<a href="#">Login Here!</a></p>
-
-                </form>
-            </div>
+            <Card>
+                <Form onSubmit = {e => this.continue(e)}>
+                    <Card.Body>
+                        <Card.Title className='text-center'>
+                        Sign Up
+                        </Card.Title>
+                        <Form.Group >
+                            <Form.Label>First Name</Form.Label>
+                            <Form.Control type="text"  value = {values.firstName} onChange = {handleChange('firstName')} placeholder="Enter first name" required/>
+                        </Form.Group>
+                        <Form.Group >
+                            <Form.Label>Last Name</Form.Label>
+                            <Form.Control type="text" value = {values.lastName} onChange = {handleChange('lastName')} placeholder="Enter last name" required />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Mobile Number</Form.Label>
+                            <Form.Control type="text" className = {validPhoneNo ? null : invalidClass} value = {values.phoneNo} onChange = {handleChange('phoneNo')} placeholder="Enter mobile number" required/>
+                            {validPhoneNo ? null : invalidPhoneNoMsg}
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control type="text" className = {validEmail ? null : invalidClass} value = {values.email} onChange = {handleChange('email')} placeholder="Enter email" required/>
+                            {validEmail ? null : invalidEmailMsg}
+                        </Form.Group>
+                        <br />
+                        <Button variant="success" type="submit" block>
+                            Continue
+                        </Button>
+                        <Button variant="light" onClick = {this.back} block>
+                            Back
+                        </Button>
+                        <Card.Text>
+                            Already have an account?&ensp;<a href="#">Login Here!</a>
+                        </Card.Text>
+                    </Card.Body>
+                </Form>
+            </Card>
+    
         );
     }
 }
