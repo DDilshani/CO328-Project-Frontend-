@@ -37,5 +37,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "CO328 project",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PasanT9/CO328-Project-Frontend-.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PasanT9/CO328-Project-Frontend-/issues"
+  },
+  "homepage": "https://github.com/PasanT9/CO328-Project-Frontend-#readme"
 }
