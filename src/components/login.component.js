@@ -29,10 +29,9 @@ export default class Login extends Component {
                 </p>
 
                 <br></br>
-                
 
                 <p className="register text-right">
-                    New to Zero Trash ? <a href="#">Register Here!</a>
+                    New to Zero Trash ? <a href="/registerLanguage">Register Here!</a>
                 </p>
 
             </form>
