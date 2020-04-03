@@ -13,7 +13,9 @@ export default class RegisterLanguage extends Component {
                     <br></br>
                     <div className="radio">
                         <label>
-                            <input type="radio" value="sinhala" /> &nbsp;Sinhala<br/>
+                            <input type="radio" value="sinhala" /> &nbsp;Sinhala
+                            <br></br>
+                            <br></br>
                             <input type="radio" value="english" /> &nbsp;English
                         </label>
                     </div>

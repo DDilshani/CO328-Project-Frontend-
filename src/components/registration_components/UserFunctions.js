@@ -47,7 +47,7 @@ export const devVerification = input => {
   console.log(input);
 
   return axios
-  .post('api/v1/verifyToken/', {
+  .post('http://collector.ceykod.com/api/v1/verifyToken/', {
     accessToken: 'f83bdbecf8f2596cfd837b11ab2aa1fb',
     userToken: input.token,
     userTele: input.phoneNo
