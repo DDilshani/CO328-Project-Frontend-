@@ -44,17 +44,23 @@ export const login = input => {
 
 export const devVerification = input => {
 
-  console.log(input);
-
-  return axios
-  .post('http://collector.ceykod.com/api/v1/verifyToken/', {
+  const data = { 
     accessToken: 'f83bdbecf8f2596cfd837b11ab2aa1fb',
     userToken: input.token,
     userTele: input.phoneNo
+  };
+
+  return fetch('http://collector.ceykod.com/api/v1/verifyToken/', {
+    method: 'POST',
+    headers: {
+
+    },
+    body: JSON.stringify(data),
   })
+  .then((response) => response.json())
   .then(response => {
-      console.log(response.data)
-      return response.data
+    console.log(response)
+    return response
   })
   .catch(err => {
     console.log(err)
