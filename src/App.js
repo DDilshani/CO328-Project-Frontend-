@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import Navigationbar from './components/layout/Navigationbar'
-import Login from './components/Login'
-import Register from './components/Register'
-import Landing from './components/Landing'
+import Login from './components/pages/Login'
+import Register from './components/pages/Register'
+import Landing from './components/pages/Landing'
 
 class App extends Component {
   render() {
