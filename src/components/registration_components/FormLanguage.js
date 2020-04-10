@@ -8,15 +8,9 @@ class FormLanguage extends Component {
         this.props.nextStep();
     }
 
-      render() { 
+      render() {
         const { handleChange } = this.props;
-
- 
-                                
-
-                                
-
-        return ( 
+        return (
             <Card>
                 <Form onSubmit = {e => this.continue(e)}>
                     <Card.Body>
@@ -25,7 +19,7 @@ class FormLanguage extends Component {
                         </Card.Title>
                         <br />
                         <div className="mb-3" className='btn-block-language'>
-                            <Button type = 'submit' value='sinhala' variant="success" size="lg" onClick={handleChange('language')}>
+                            <Button type = 'button' value='sinhala' variant="success" size="lg" className="disabled" >
                             Sinhala
                             </Button>
                             <Button type = 'submit' value = 'english' variant="success" size="lg" onClick={handleChange('language')}>
@@ -38,5 +32,5 @@ class FormLanguage extends Component {
         );
     }
 }
- 
+
 export default FormLanguage;
