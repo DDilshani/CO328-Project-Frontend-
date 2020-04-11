@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const register = newCustomer => {
   return axios
-    .post('http://68.183.188.135:5000/customers/register', {
+    .post('customers/register', {
       firstName: newCustomer.firstName,
       lastName: newCustomer.lastName,
       phoneNo: newCustomer.phoneNo,
@@ -28,7 +28,7 @@ export const login = input => {
     let rememberMe = input.rememberMe;
 
     return axios
-    .post('http://68.183.188.135:5000/customers/login', {
+    .post('customers/login', {
       phoneNo: newCustomer.phoneNo,
       email: newCustomer.email,
       password: newCustomer.password
