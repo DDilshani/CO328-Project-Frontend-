@@ -1,8 +1,7 @@
 import axios from 'axios'
 
 export const register = newCustomer => {
-   return axios
-   .post('customers/register', {
+   const data = {
       firstName: newCustomer.firstName,
       lastName: newCustomer.lastName,
       phoneNo: newCustomer.phoneNo,
@@ -14,8 +13,15 @@ export const register = newCustomer => {
       password: newCustomer.password,
       customerType: newCustomer.customerType,
       language: newCustomer.language,
+   };
+
+   return fetch(global.config.backend + 'customers/register', {
+      method: 'POST',
+      headers: {},
+      body: JSON.stringify(data)
    })
    .then(response => {
+      console.log(response);
       return response.data;
    })
    .catch(err => {
@@ -26,14 +32,19 @@ export const register = newCustomer => {
 export const login = input => {
    let newCustomer = input.customer;
    //let rememberMe = input.rememberMe;
-
-   return axios
-   .post('customers/login', {
+   const data = {
       phoneNo: newCustomer.phoneNo,
       email: newCustomer.email,
       password: newCustomer.password
+   };
+
+   return fetch(global.config.backend + 'customers/login', {
+      method: 'POST',
+      headers: {},
+      body: JSON.stringify(data)
    })
    .then(response => {
+      console.log(response);
       localStorage.setItem('usertoken', response.data.sessionToken);
       return response.data
    })
@@ -50,14 +61,11 @@ export const devVerification = input => {
       userTele: input.phoneNo
    };
 
-   console.log(global.config.telco.tokenVerify);
 
    return fetch(global.config.telco.tokenVerify, {
       method: 'POST',
-      headers: {
-
-      },
-      body: JSON.stringify(data),
+      headers: {},
+      body: JSON.stringify(data)
    })
    .then((response) => response.json())
    .then(response => {
