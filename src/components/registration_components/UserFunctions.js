@@ -14,6 +14,7 @@ export const register = newCustomer => {
       password: newCustomer.password,
       customerType: newCustomer.customerType,
       language: newCustomer.language,
+      municipalCouncil: newCustomer.municipalCouncil,
     })
     .then(response => {
       return response.data;

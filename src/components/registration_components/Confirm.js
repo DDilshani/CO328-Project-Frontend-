@@ -12,7 +12,7 @@ export class Confirm extends Component {
     continue = e => {
         e.preventDefault();
 
-        const { values: {firstName, lastName, phoneNo, email, customerType, password, address1, address2, city, regDate, language} } = this.props;
+        const { values: {firstName, lastName, phoneNo, email, customerType, password, address1, address2, city, regDate, language, municipalCouncil} } = this.props;
         console.log(this.props.values);
         const customer = {
             firstName: firstName,
@@ -25,7 +25,8 @@ export class Confirm extends Component {
             address2: address2,
             city: city,
             regDate: regDate,
-            language: language
+            language: language,
+            municipalCouncil: municipalCouncil,
         }
         console.log(customer);
         register(customer).then(res => {

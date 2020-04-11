@@ -37,6 +37,14 @@ export class FormAddressDetails extends Component {
                             <Form.Label>City</Form.Label>
                             <Form.Control type="text" value = {values.city} onChange = {handleChange('city')} placeholder="City" required/>
                         </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Municipal Council</Form.Label>
+                            <Form.Control as="select" value = {values.municipalCouncil} onChange = {handleChange('municipalCouncil')} required>
+                                <option>Colombo</option>
+                                <option>Kandy</option>
+                                <option>Bandarawela</option>
+                            </Form.Control>
+                        </Form.Group>
                         <br />
                         <Button variant="success" type="submit" block>
                             Continue
