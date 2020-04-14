@@ -13,16 +13,17 @@ export const register = newCustomer => {
       password: newCustomer.password,
       customerType: newCustomer.customerType,
       language: newCustomer.language,
+      municipalCouncil: newCustomer.municipalCouncil,
    };
 
-   return fetch(global.config.backend + 'customers/register', {
+   return fetch('http://collector.ceykod.com/api/v1/register/', {
       method: 'POST',
       headers: {},
       body: JSON.stringify(data)
    })
+   .then((response) => response.json())
    .then(response => {
-      console.log(response);
-      return response.data;
+      return response;
    })
    .catch(err => {
       console.log(err)
@@ -38,15 +39,15 @@ export const login = input => {
       password: newCustomer.password
    };
 
-   return fetch(global.config.backend + 'customers/login', {
+   return fetch('http://collector.ceykod.com/api/v1/login/', {
       method: 'POST',
       headers: {},
       body: JSON.stringify(data)
    })
+   .then((response) => response.json())
    .then(response => {
       console.log(response);
-      localStorage.setItem('usertoken', response.data.sessionToken);
-      return response.data
+      return response;
    })
    .catch(err => {
       console.log(err)
