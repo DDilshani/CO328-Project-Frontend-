@@ -13,6 +13,7 @@ export const register = newCustomer => {
       password: newCustomer.password,
       customerType: newCustomer.customerType,
       language: newCustomer.language,
+      municipalCouncil: newCustomer.municipalCouncil,
    };
 
    return fetch(global.config.backend + 'customers/register', {
@@ -21,7 +22,6 @@ export const register = newCustomer => {
       body: JSON.stringify(data)
    })
    .then(response => {
-      console.log(response);
       return response.data;
    })
    .catch(err => {
