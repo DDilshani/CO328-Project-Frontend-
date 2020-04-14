@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Navigationbar from './components/layout/Navigationbar'
 import Login from './components/pages/Login'
 import Register from './components/pages/Register'
 import Landing from './components/pages/Landing'
+
+import Dashboard from './components/Dashboard';
+import Step from './components/Step';
 
 class App extends Component {
   render() {
