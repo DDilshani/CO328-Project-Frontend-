@@ -33,16 +33,16 @@ export class Confirm extends Component {
          if (res) {
             let statusCode = res.statusCode;
             console.log(statusCode);
-            if(statusCode == 'S2000'){
+            if(statusCode === 'S2000'){
                console.log('Success')
                this.setState({validInput: true, validServer :true});
                window.location.href = '/login';
             }
-            else if(statusCode == 'E4001'){
+            else if(statusCode === 'E4001'){
                console.log('Wrong')
                this.setState({validInput: false, validServer : true});
             }
-            else if(statusCode == 'E5000'){
+            else if(statusCode === 'E5000'){
                console.log('Error')
                this.setState({validInput: true, validServer : false});
             }
