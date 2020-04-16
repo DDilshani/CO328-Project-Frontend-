@@ -1,30 +1,52 @@
-'use strict'
-import React, { useState } from 'react'
-import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
+import React, { Component } from 'react';
+import { Button, Form, Card, ButtonGroup, Container, Row, Col } from 'react-bootstrap';
+
+class StepThree extends Component {
 
 
-export default () => {
-   return (
-      <div className="steps">
-         <Card style={{ width: '27.5rem' }}>
-            <CardBody>
-               <CardText>
+   continue (e) {
+      e.preventDefault();
+      this.props.nextStep();
+   }
 
-                  <div className='row'>
-                     <div className='ten columns terms'>
-                        <div><b>Pickup places successfully.</b></div>
-                        <br></br>
-                        <div><b>You will be contacted soon.</b></div>
-                        <br></br>
-                        <br></br>
-                        <br></br>
-                     </div>
-                  </div>
+   back = e => {
+      e.preventDefault();
+      this.props.prevStep();
+   }
 
-               </CardText>
-            </CardBody>
-         </Card>
-         <br></br>
-      </div>
-   )
+   render(){
+
+      const { handleChange } = this.props;
+
+      return (
+         <div className="steps">
+            <Card>
+               <Card.Body>
+                  <Form onSubmit = {e => this.continue(e)}>
+                     <div><b>Please confirm your pickup</b></div>
+                     <br></br>
+                     <div>Details:</div>
+                     <br/><br/>
+                     <div>(Pick will be collected within three days)</div>
+                     <br/>
+                     <Container>
+                        <Row>
+                           <Col>
+                              <Button variant="light" block onClick={this.back}>Back</Button>
+                           </Col>
+                           <Col>&nbsp;</Col>
+                           <Col>
+                              <Button variant="success" type="submit" block>Confirm</Button>
+                           </Col>
+                        </Row>
+                     </Container>
+                  </Form>
+               </Card.Body>
+            </Card>
+            <br></br>
+         </div>
+      )
+   }
 }
+
+export default StepThree;

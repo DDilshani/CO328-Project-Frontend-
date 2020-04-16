@@ -112,7 +112,7 @@ export class FormPersonalDetails extends Component {
                   <Button variant="success" type="submit" block>
                      Continue
                   </Button>
-                  <Button variant="light" onClick = {this.back} block>
+                  <Button variant="light" onClick ={this.back} block>
                      Back
                   </Button>
                   <Card.Text>

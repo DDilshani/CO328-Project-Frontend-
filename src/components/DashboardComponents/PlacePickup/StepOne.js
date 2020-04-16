@@ -1,60 +1,62 @@
-'use strict'
-import React, { useState } from 'react'
-import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
+import React, { Component } from 'react';
+import { Button, Form, Card, ButtonGroup, Container, Row, Col } from 'react-bootstrap';
 
-export default () => {
-   const [firstName, setFirstName] = useState('')
-   const [lastName, setLastName] = useState('')
+class StepOne extends Component {
 
-   return (
-      <div className="steps">
-         <Card style={{ width: '27.5rem' }}>
-            <CardBody>
-               <CardText>
-                  <div className='row'>
-                     <div className='six columns'>
-                        <label>Collect Form</label>
-                        <select placeholder="Date" className='u-full-width form-control' type='text' autoFocus>
-                           <option value="">Tomorrow</option>
-                           <option value="">Tomorrow</option>
-                           <option value="">Tomorrow</option>
-                        </select>
-                     </div>
-                  </div>
-                  <br></br>
+   continue (e) {
+      e.preventDefault();
+      this.props.nextStep();
+   }
 
-                  <div className='row'>
-                     <div className='six columns'>
-                        <label>Timeslot</label>
-                        <select placeholder="Time" className='u-full-width form-control' type='text' autoFocus>
+   render(){
+
+      const { handleChange } = this.props;
+
+      return (
+         <div className="steps">
+            <Card>
+               <Card.Body>
+                  <Form onSubmit = {e => this.continue(e)}>
+                     <Form.Group>
+                        <Form.Label>Timeslot</Form.Label>
+                        <Form.Control as="select" required>
                            <option value="">7.00 AM - 9.00 AM</option>
                            <option value="">9.00 AM - 11.00 AM</option>
                            <option value="">11.00 AM - 13.00 AM</option>
                            <option value="">13.00 AM - 15.00 AM</option>
-                        </select>
-                     </div>
-                  </div>
-                  <br></br>
+                        </Form.Control>
+                     </Form.Group>
 
-                  <div className='row'>
-                     <div className='six columns'>
-                        <label>Address</label>
-                        <input className='u-full-width' placeholder='Address' type='text' />
-                     </div>
-                  </div>
-                  <br></br>
+                     <Form.Group>
+                        <Form.Label>Mobile Number</Form.Label>
+                        <Form.Control type="text" placeholder="Enter mobile number" required/>
+                     </Form.Group>
 
-                  <div className='row'>
-                     <div className='six columns'>
-                        <label>Contact Number</label>
-                        <input className='u-full-width' placeholder='number' type='text' />
-                     </div>
-                  </div>
+                     <Form.Group>
+                        <Form.Label>Address</Form.Label>
+                        <Form.Control placeholder="Pickup Address" as="textarea" rows="3" required />
+                     </Form.Group>
 
-               </CardText>
-            </CardBody>
-         </Card>
-         <br></br>
-      </div>
-   )
+                     <br />
+                     <Container>
+                        <Row>
+                           <Col>
+                              <Button variant="light" block>Back</Button>
+                           </Col>
+                           <Col>&nbsp;</Col>
+                           <Col>
+                              <Button variant="success" type="submit" block>Next</Button>
+                           </Col>
+                        </Row>
+                     </Container>
+                  </Form>
+               </Card.Body>
+            </Card>
+            <br></br>
+         </div>
+      )
+   }
+
 }
+
+export default StepOne;
