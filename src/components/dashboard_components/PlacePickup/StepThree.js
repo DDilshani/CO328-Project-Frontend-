@@ -27,7 +27,7 @@ class StepThree extends Component {
                      <br></br>
                      <div>Details:</div>
                      <br/><br/>
-                     <div>(Pick will be collected within three days)</div>
+                     <div>(A Pick will be collected within three days)</div>
                      <br/>
                      <Container>
                         <Row>

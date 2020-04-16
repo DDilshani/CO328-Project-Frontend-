@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import Multistep from 'react-multistep'
 
 import StepOne from './PlacePickup/StepOne'
 import StepTwo from './PlacePickup/StepTwo'
 import StepThree from './PlacePickup/StepThree'
 
+// CSS for multistep styling, this will be updated soon
 import './Pickup/multiStep.css'
 
 const steps = [
@@ -48,7 +48,7 @@ class NewPickup extends Component {
          [input]: e.target.value
       });
    }
-   
+
    render() {
 
       return (

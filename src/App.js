@@ -5,8 +5,8 @@ import Navigationbar from './components/layout/Navigationbar'
 import Login from './components/pages/Login'
 import Register from './components/pages/Register'
 import Landing from './components/pages/Landing'
-import Dashboard from './components/DashboardComponents/Dashboard';
-import NewPickup from './components/DashboardComponents/NewPickup';
+import Dashboard from './components/dashboard_components/Dashboard';
+import NewPickup from './components/dashboard_components/NewPickup';
 
 class App extends Component {
    render() {
