@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Row, Col, Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import Image from 'react-icons/lib/fa/image';
 import PickupListItem from './PickupListItem';
@@ -16,9 +17,16 @@ class Dashboard extends Component {
                <Container>
                   <Row>
                      <Col>
-                        <Image size={200} ></Image>
-                        <br></br>
-                        <h5 >Schedule a pickup</h5>
+                        <Link to="../newPickup">
+                           <div style={{display: "flex",justifyContent: "center",alignItems: "center"}}>
+                              <div>
+                                 <Image size={200}></Image>
+                                 <br/>
+                                 <h5 align="center">Schedule a Pickup</h5>
+                              </div>
+
+                           </div>
+                        </Link>
                      </Col>
                      <Col>
                         <b>Instructions to Schedule a Pickup</b>

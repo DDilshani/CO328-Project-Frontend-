@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import Multistep from 'react-multistep'
 
 import StepOne from './PlacePickup/StepOne'
 import StepTwo from './PlacePickup/StepTwo'
 import StepThree from './PlacePickup/StepThree'
+
+import './Pickup/multiStep.css'
 
 const steps = [
    { name: 'Step 1 ', component: <StepOne /> },
@@ -13,18 +15,53 @@ const steps = [
 ];
 
 class NewPickup extends Component {
+   state = {
+      step:1
+   };
+
+   nextStep = () => {
+      const { step } = this.state;
+      this.setState({
+         step: step + 1
+      });
+   }
+
+   prevStep = () => {
+      const { step } = this.state;
+      this.setState({
+         step: step - 1
+      });
+   }
+
+   getStep(){
+      if(this.state.step==1){
+         return <StepOne nextStep = {this.nextStep}/>;
+      }else if(this.state.step==2){
+         return <StepTwo nextStep = {this.nextStep} prevStep = {this.prevStep}/>;
+      }else{
+         return <StepThree nextStep = {this.nextStep} prevStep = {this.prevStep}/>;
+      }
+   }
+
+   handleChange = input => e => {
+      this.setState({
+         [input]: e.target.value
+      });
+   }
+   
    render() {
+
       return (
-         <div className="">
-            <br/>
-            <div >
-               <div>
-                  <Container className="stepperForm" fluid="m">
-                     <Multistep steps={steps} showNavigation={false} />
-                  </Container>
-               </div>
-            </div>
-         </div>
+         <Container>
+            <Row>
+
+            </Row>
+            <Row>
+               <Col>
+                  {this.getStep()}
+               </Col>
+            </Row>
+         </Container>
       )
    }
 }
