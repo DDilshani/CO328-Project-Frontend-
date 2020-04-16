@@ -43,7 +43,6 @@ class PickupListItem extends Component {
    }
 }
 
-
 Feedback.propTypes = {
    pickupId: PropTypes.number.isRequired,
    pickupState: PropTypes.string.isRequired,
