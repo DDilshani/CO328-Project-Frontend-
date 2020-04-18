@@ -1,8 +1,7 @@
-import axios from 'axios'
+//import axios from 'axios'
 
 export const register = newCustomer => {
-   return axios
-   .post('customers/register', {
+   const data = {
       firstName: newCustomer.firstName,
       lastName: newCustomer.lastName,
       phoneNo: newCustomer.phoneNo,
@@ -14,9 +13,17 @@ export const register = newCustomer => {
       password: newCustomer.password,
       customerType: newCustomer.customerType,
       language: newCustomer.language,
+      municipalCouncil: newCustomer.municipalCouncil,
+   };
+
+   return fetch('http://collector.ceykod.com/api/v1/register/', {
+      method: 'POST',
+      headers: {},
+      body: JSON.stringify(data)
    })
+   .then((response) => response.json())
    .then(response => {
-      return response.data;
+      return response;
    })
    .catch(err => {
       console.log(err)
@@ -26,16 +33,21 @@ export const register = newCustomer => {
 export const login = input => {
    let newCustomer = input.customer;
    //let rememberMe = input.rememberMe;
-
-   return axios
-   .post('customers/login', {
+   const data = {
       phoneNo: newCustomer.phoneNo,
       email: newCustomer.email,
       password: newCustomer.password
+   };
+
+   return fetch('http://collector.ceykod.com/api/v1/login/', {
+      method: 'POST',
+      headers: {},
+      body: JSON.stringify(data)
    })
+   .then((response) => response.json())
    .then(response => {
-      localStorage.setItem('usertoken', response.data.sessionToken);
-      return response.data
+      console.log(response);
+      return response;
    })
    .catch(err => {
       console.log(err)
@@ -50,14 +62,11 @@ export const devVerification = input => {
       userTele: input.phoneNo
    };
 
-   console.log(global.config.telco.tokenVerify);
 
    return fetch(global.config.telco.tokenVerify, {
       method: 'POST',
-      headers: {
-
-      },
-      body: JSON.stringify(data),
+      headers: {},
+      body: JSON.stringify(data)
    })
    .then((response) => response.json())
    .then(response => {
