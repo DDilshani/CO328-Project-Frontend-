@@ -12,7 +12,7 @@ export class Confirm extends Component {
    continue = e => {
       e.preventDefault();
 
-      const { values: {firstName, lastName, phoneNo, email, customerType, password, address1, address2, city, regDate, language} } = this.props;
+      const { values: {firstName, lastName, phoneNo, email, customerType, password, address1, address2, city, regDate, language, municipalCouncil} } = this.props;
       console.log(this.props.values);
       const customer = {
          firstName: firstName,
@@ -25,7 +25,8 @@ export class Confirm extends Component {
          address2: address2,
          city: city,
          regDate: regDate,
-         language: language
+         language: language,
+         municipalCouncil: municipalCouncil,
       }
       console.log(customer);
       register(customer).then(res => {
@@ -52,12 +53,10 @@ export class Confirm extends Component {
       })
    }
 
-
    back = e => {
       e.preventDefault();
       this.props.prevStep();
    }
-
 
    render() {
 
@@ -75,6 +74,7 @@ export class Confirm extends Component {
 
       const { values: {firstName, lastName, phoneNo, email, address1, address2, city} } = this.props;
       const { validInput, validServer} = this.state;
+
       return (
 
          <Card>
@@ -99,7 +99,7 @@ export class Confirm extends Component {
                      <Form.Label>Address</Form.Label>
                      <Form.Control type="text"  value = {address1+ ", "+address2 + ", " + city} readOnly/>
                   </Form.Group>
-                  <br />
+                  <br/>
                   {validServer? (validInput? null : invalidInputMsg) : invalidServerMsg}
                   <Button variant="success" type="submit" block>
                      Confirm & Submit
@@ -108,13 +108,14 @@ export class Confirm extends Component {
                      Back
                   </Button>
                   <Card.Text>
-                     Already have an account?&ensp;<a href="#">Login Here!</a>
-               </Card.Text>
-            </Card.Body>
-         </Form>
-      </Card>
-   );
-}
+                     Already have an account?&ensp;
+                     <a href="#">Login Here!</a>
+                  </Card.Text>
+               </Card.Body>
+            </Form>
+         </Card>
+      );
+   }
 }
 
 export default Confirm;

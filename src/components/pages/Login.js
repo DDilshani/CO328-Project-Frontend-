@@ -45,6 +45,7 @@ class Login extends Component {
             console.log(statusCode);
             if(statusCode === 'S2000'){
                console.log('Success')
+               localStorage.setItem('usertoken', res.sessionToken);
                this.setState({validInput: true, validServer :true});
                window.location.href = '/';
             }

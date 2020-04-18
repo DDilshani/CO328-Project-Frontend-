@@ -116,6 +116,13 @@ class Register extends Component {
                values = {values}
                />
          )
+         default:
+         return (
+            <FormLanguage
+               nextStep = {this.nextStep}
+               handleChange = {this.handleChange}
+               />
+         )
       }
    }
 }
