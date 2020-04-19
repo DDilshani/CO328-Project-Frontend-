@@ -7,7 +7,8 @@ class Delete extends Component {
    constructor() {
       super()
       this.state = {
-         show: false
+         show: false,
+         rating: '',
       }
    }
 
@@ -16,7 +17,7 @@ class Delete extends Component {
    }
 
    render() {
-      const pickupId = this.props.pickupId;
+      const { pickupId }  = this.props;
 
       return (
          <div>
@@ -31,7 +32,7 @@ class Delete extends Component {
                   <br/>
                </Modal.Body>
                <Modal.Footer>
-                  <Button variant="success" >Delete</Button>
+                  <Button variant="success">Delete</Button>
                </Modal.Footer>
             </Modal>
          </div>
