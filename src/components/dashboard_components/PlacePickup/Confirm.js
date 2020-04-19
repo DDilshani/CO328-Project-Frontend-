@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, Card, Alert} from 'react-bootstrap';
-import { newPickup } from './UserFunctions';
+import { newPickup } from './../UserFunctions';
 
 class Confirm extends Component {
    state = {
@@ -16,6 +16,7 @@ class Confirm extends Component {
          time: time,
          address: address,
       }
+
       newPickup(pickup).then(res => {
          if (res) {
             let statusCode = res.statusCode;
@@ -23,7 +24,7 @@ class Confirm extends Component {
             if(statusCode === 'S2000'){
                console.log('Success')
                this.setState({validServer :true});
-               window.location.href = '/home';
+               //window.location.href = '/home';
             }
             else if(statusCode === 'E5000'){
                console.log('Error')

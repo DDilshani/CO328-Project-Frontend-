@@ -68,30 +68,13 @@ class FormPickupDetails extends Component {
                      </Form.Group>
                      <Form.Group >
                         <Form.Label>Pickup Time</Form.Label>
-                        <Form.Control as="select" value = {values.time} onChange = {handleChange('time')} required>
-                           <option>1:00 a.m.</option>
-                           <option>2:00 a.m.</option>
-                           <option>3:00 a.m.</option>
-                           <option>4:00 a.m.</option>
-                           <option>5:00 a.m.</option>
-                           <option>6:00 a.m.</option>
-                           <option>7:00 a.m.</option>
-                           <option>8:00 a.m.</option>
-                           <option>9:00 a.m.</option>
-                           <option>10:00 a.m.</option>
-                           <option>11:00 a.m.</option>
-                           <option>12:00 p.m.</option>
-                           <option>1:00 p.m.</option>
-                           <option>2:00 p.m.</option>
-                           <option>3:00 p.m.</option>
-                           <option>4:00 p.m.</option>
-                           <option>5:00 p.m.</option>
-                           <option>6:00 p.m.</option>
-                           <option>7:00 p.m.</option>
-                           <option>8:00 p.m.</option>
-                           <option>9:00 p.m.</option>
-                           <option>10:00 p.m.</option>
-                           <option>11:00 p.m.</option>
+                        <Form.Control as="select" required value = {values.time} onChange = {handleChange('time')}>
+                           <option value='8'>8:00 a.m. - 10:00 a.m.</option>
+                           <option value='10'>10:00 a.m. - 12:00 p.m.</option>
+                           <option value='12'>12:00 p.m. - 2:00 p.m.</option>
+                           <option value='14'>2:00 p.m. - 4:00 p.m.</option>
+                           <option value='16'>4:00 p.m. - 6:00 p.m.</option>
+                           <option value='18'>6:00 p.m. - 8:00 p.m.</option>
                         </Form.Control>
                      </Form.Group>
                      <br />

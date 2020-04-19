@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 
-import FormPickupDetails from './../dashboard_components/PlacePickup/FormPickupDetails';
-import FormPickupAgree from './../dashboard_components/PlacePickup/FormPickupAgree'
-import Confirm from './../dashboard_components/PlacePickup/Confirm'
+import FormPickupDetails from './PlacePickup/FormPickupDetails';
+import FormPickupAgree from './PlacePickup/FormPickupAgree'
+import Confirm from './PlacePickup/Confirm'
+import { getUserData } from './UserFunctions';
+
 
 class NewPickup extends Component {
    state = {
@@ -32,11 +34,27 @@ class NewPickup extends Component {
       });
    }
 
+   handleUserData = () => {
+      getUserData().then(res => {
+         if (res.statusCode==='S2000') {
+            this.setState({phoneNo: res.phone});
+            let address = res.address.address1 + ' ' + res.address.address2 + ' ' + res.address.city;
+            this.setState({address: address}); 
+         }
+      })
+   }
+   
+   componentDidMount(){
+      this.handleUserData();
+   }
+    
+   
    render() {
 
+
       const { step } = this.state;
-      const {time, phoneNo, address} = this.state;
-      const values = {time, phoneNo, address};
+      const {time, phoneNo, address, date} = this.state;
+      const values = {time, phoneNo, address, date};
 
       switch(step) {
          case 1:
