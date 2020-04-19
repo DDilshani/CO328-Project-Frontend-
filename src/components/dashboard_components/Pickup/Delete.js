@@ -3,17 +3,46 @@ import { Button, Modal } from 'react-bootstrap';
 import Trash from 'react-icons/lib/fa/trash-o';
 import PropTypes from 'prop-types'
 
+import { deletePickup } from './../UserFunctions';
+
 class Delete extends Component {
    constructor() {
       super()
       this.state = {
          show: false,
-         rating: '',
       }
    }
 
    delete() {
       this.setState({ show: !this.state.show })
+   }
+
+   continue = e => {
+
+      const { pickupId } = this.props;
+
+      const pickup = {
+         pickupId: pickupId,
+      }
+
+      deletePickup(pickup).then(res => {
+         if (res) {
+            let statusCode = res.statusCode;
+            console.log(statusCode);
+            if(statusCode === 'S2000'){
+               console.log('Success')
+               window.location.href = '/home';
+            }
+            else if(statusCode === 'E5000'){
+               console.log('Error')
+            }
+         }
+         else{
+            console.log('Error')
+         }
+      })
+
+
    }
 
    render() {
@@ -32,7 +61,7 @@ class Delete extends Component {
                   <br/>
                </Modal.Body>
                <Modal.Footer>
-                  <Button variant="success">Delete</Button>
+                  <Button variant="success" onClick = {e => this.continue(e)}>Delete</Button>
                </Modal.Footer>
             </Modal>
          </div>

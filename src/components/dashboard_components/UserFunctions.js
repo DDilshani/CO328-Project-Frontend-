@@ -61,7 +61,7 @@ export const getListItems = () => {
    })
 }
 
-export const rate = pickup => {
+export const ratePickup = pickup => {
    let userToken = localStorage.usertoken;
    let bearer = 'Bearer ' + userToken;
 
@@ -71,6 +71,30 @@ export const rate = pickup => {
     };
  
     return fetch('http://collector.ceykod.com/api/v1/pickups/rate/', {
+      method: 'POST',
+      headers: {
+         'Authorization': bearer,
+      },
+      body: JSON.stringify(data)
+    })
+    .then((response) => response.json())
+    .then(response => {
+       return response;
+    })
+    .catch(err => {
+       console.log(err)
+    })
+}
+
+export const deletePickup = pickup => {
+   let userToken = localStorage.usertoken;
+   let bearer = 'Bearer ' + userToken;
+
+    const data = {
+      pickupId: pickup.pickupId,
+    };
+ 
+    return fetch('http://collector.ceykod.com/api/v1/pickups/delete/', {
       method: 'POST',
       headers: {
          'Authorization': bearer,
