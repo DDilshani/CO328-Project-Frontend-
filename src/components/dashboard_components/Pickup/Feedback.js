@@ -4,7 +4,7 @@ import Star from 'react-icons/lib/fa/star';
 import Rating from './Rating';
 import PropTypes from 'prop-types'
 
-import { rate } from './../UserFunctions';
+import { ratePickup } from './../UserFunctions';
 
 class Feedback extends Component {
 
@@ -34,13 +34,13 @@ class Feedback extends Component {
          rate: rating,
       }
 
-      rate(pickup).then(res => {
+      ratePickup(pickup).then(res => {
          if (res) {
             let statusCode = res.statusCode;
             console.log(statusCode);
             if(statusCode === 'S2000'){
                console.log('Success')
-               //window.location.href = '/home';
+               window.location.href = '/home';
             }
             else if(statusCode === 'E5000'){
                console.log('Error')
