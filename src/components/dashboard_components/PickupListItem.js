@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, Table } from 'react-bootstrap';
 
 import Feedback from './Pickup/Feedback';
 import Delete from './Pickup/Delete';
@@ -10,7 +9,7 @@ class PickupListItem extends Component {
 
    renderPickupState(s){
       switch(s) {
-         case 'AWAITING':
+         case 'PENDING':
          return <td className="await">Awaiting Pickup</td>;
          case 'COMPLETED':
          return <td className="complete">Completed</td>;
@@ -20,7 +19,7 @@ class PickupListItem extends Component {
    }
 
    renderPickupOption(s, pickupId){
-      if(this.props.pickupState==='AWAITING'){
+      if(this.props.pickupState==='PENDING'){
          return <Delete pickupId={pickupId}/>
       }else{
          return <Feedback pickupId={pickupId}></Feedback>

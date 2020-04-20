@@ -44,10 +44,10 @@ class Login extends Component {
             let statusCode = res.statusCode;
             console.log(statusCode);
             if(statusCode === 'S2000'){
-               console.log('Success')
-               localStorage.setItem('usertoken', res.sessionToken);
+               console.log(res.authToken);
+               localStorage.setItem('usertoken', res.authToken);
                this.setState({validInput: true, validServer :true});
-               window.location.href = '/';
+               window.location.href = '/home';
             }
             else if(statusCode === 'E4001'){
                console.log('Wrong')
@@ -110,15 +110,15 @@ class Login extends Component {
                   </Button>
                   <Card.Text>
                      forgot&ensp;<a href="#">password?</a>
-               </Card.Text>
-               <Card.Text>
-                  new to Zero Trash?&ensp;<a href="/register">Register Here!</a>
-            </Card.Text>
-         </Card.Body>
-      </Form>
-   </Card>
-);
-}
+                  </Card.Text>
+                  <Card.Text>
+                     new to Zero Trash?&ensp;<a href="/register">Register Here!</a>
+                  </Card.Text>
+               </Card.Body>
+            </Form>
+         </Card>
+      );
+   }
 }
 
 export default Login;

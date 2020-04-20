@@ -111,7 +111,6 @@ class Register extends Component {
          case 6:
          return (
             <Confirm
-               nextStep = {this.nextStep}
                prevStep = {this.prevStep}
                values = {values}
                />

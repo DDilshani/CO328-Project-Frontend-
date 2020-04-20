@@ -6,7 +6,7 @@ import Login from './components/pages/Login'
 import Register from './components/pages/Register'
 import Landing from './components/pages/Landing'
 import Dashboard from './components/dashboard_components/Dashboard';
-import NewPickup from './components/dashboard_components/NewPickup';
+import NewPickup from './components/dashboard_components/newPickup';
 
 class App extends Component {
    render() {
