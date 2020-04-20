@@ -7,6 +7,23 @@ class Confirm extends Component {
       validServer: true,
    }
 
+   getPickupTime(timeState){
+      switch(timeState) {
+         case '8':
+         return ('8:00 a.m. - 10:00 a.m.');
+         case '10':
+         return ('10:00 a.m. - 12:00 p.m.');
+         case '12':
+         return '12:00 p.m. - 2:00 p.m.';
+         case '14':
+         return ('2:00 p.m. - 4:00 p.m.');
+         case '16':
+         return ('4:00 p.m. - 6:00 p.m.');
+         case '18':
+         return ('6:00 p.m. - 8:00 p.m.');
+      }
+   }
+
    continue = e => {
       e.preventDefault();
 
@@ -24,7 +41,7 @@ class Confirm extends Component {
             if(statusCode === 'S2000'){
                console.log('Success')
                this.setState({validServer :true});
-               //window.location.href = '/home';
+               window.location.href = '/home';
             }
             else if(statusCode === 'E5000'){
                console.log('Error')
@@ -41,7 +58,6 @@ class Confirm extends Component {
       e.preventDefault();
       this.props.prevStep();
    }
-   
 
    render(){
       const { values: {phoneNo, address, time} } = this.props;
@@ -70,7 +86,7 @@ class Confirm extends Component {
                   </Form.Group>
                   <Form.Group>
                      <Form.Label>Pickup Time</Form.Label>
-                     <Form.Control type="text" value = {time} readOnly/>
+                     <Form.Control type="text" value = {this.getPickupTime(time)} readOnly/>
                   </Form.Group>
                   <br/>
                   {validServer? null : invalidServerMsg}
