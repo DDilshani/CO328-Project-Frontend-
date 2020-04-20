@@ -14,17 +14,17 @@ class Dashboard extends Component {
    getPickupTime(timeState){
       switch(timeState) {
          case '8':
-            return '8:00 a.m. - 10:00 a.m.';
+         return '8:00 a.m. - 10:00 a.m.';
          case '10':
-            return '10:00 a.m. - 12:00 p.m.';
+         return '10:00 a.m. - 12:00 p.m.';
          case '12':
-            return '12:00 p.m. - 2:00 p.m.';
+         return '12:00 p.m. - 2:00 p.m.';
          case '14':
-            return '2:00 p.m. - 4:00 p.m.';
+         return '2:00 p.m. - 4:00 p.m.';
          case '16':
-            return '4:00 p.m. - 6:00 p.m.';
+         return '4:00 p.m. - 6:00 p.m.';
          case '18':
-            return '6:00 p.m. - 8:00 p.m.';
+         return '6:00 p.m. - 8:00 p.m.';
       }
    }
 
@@ -37,9 +37,10 @@ class Dashboard extends Component {
                let time = this.getPickupTime(res.data[i].timeSlot);
                let item = {
                   pickupState: res.data[i].state,
-                  pickupId: res.data[i].id,
+                  pickupId: parseInt(res.data[i].id),
                   pickupDate: date[0],
                   pickupTime: time,
+                  rating: parseInt(res.data[i].rating)
                }
                list.push(item);
             }
@@ -51,7 +52,7 @@ class Dashboard extends Component {
    componentDidMount(){
       this.handleListItems();
    }
-    
+
    render() {
 
       var { list } = this.state;
@@ -96,14 +97,15 @@ class Dashboard extends Component {
                            <br/>
                            <Table responsive striped >
                               <tbody>
-                              {list.map(function(item, i){
-                                 return <PickupListItem
-                                    pickupState={item.pickupState}
-                                    pickupId={item.pickupId}
-                                    pickupDate={item.pickupDate}
-                                    pickupTime={item.pickupTime}
-                                    key={i}/>;
-                              })} 
+                                 {list.map(function(item, i){
+                                    return <PickupListItem
+                                       pickupState={item.pickupState}
+                                       pickupId={item.pickupId}
+                                       pickupDate={item.pickupDate}
+                                       pickupTime={item.pickupTime}
+                                       rating={item.rating}
+                                       key={i}/>;
+                                 })}
                               </tbody>
                            </Table>
                         </div>
@@ -117,4 +119,3 @@ class Dashboard extends Component {
 }
 
 export default Dashboard;
-

@@ -4,21 +4,28 @@ import { Button, Form, Card} from 'react-bootstrap';
 class FormPickupDetails extends Component {
    state = {
       validPhoneNo: true,
+      validTime: true
    }
 
    continue (e) {
       e.preventDefault();
 
-      const {phoneNo} = this.props.values
-
+      const {phoneNo, time} = this.props.values
       let allow = true;
+
       if(!this.validatePhoneNo(phoneNo)) {
          this.setState({
             validPhoneNo: false
          });
          allow = false;
-      }
-      else{
+
+      } else if( !this.validateTime(time)){
+         this.setState({
+            validTime: false
+         });
+         allow = false;
+
+      } else{
          this.setState({
             validPhoneNo: true
          });
@@ -29,19 +36,24 @@ class FormPickupDetails extends Component {
    }
 
    validatePhoneNo(phoneNo) {
-
       let regPhoneNo = /^07\d{8}$/;
       if(phoneNo.match(regPhoneNo)) {
          return true;
       }
       return false;
+   }
 
+   validateTime(time) {
+      if(time.length>0) {
+         return true;
+      }
+      return false;
    }
 
    render(){
 
-      const { values,handleChange } = this.props;
-      const { validPhoneNo} = this.state;
+      const {values,handleChange} = this.props;
+      const {validPhoneNo, validTime} = this.state;
       const invalidClass = 'is-invalid';
 
       const invalidPhoneNoMsg = (
@@ -53,34 +65,34 @@ class FormPickupDetails extends Component {
       return (
          <Card>
             <Form onSubmit = {e => this.continue(e)}>
-                  <Card.Body>
-                     <Card.Title className='text-center'>
-                        Shedule a pickup
-                     </Card.Title>
-                     <Form.Group>
-                        <Form.Label>Mobile Number</Form.Label>
-                        <Form.Control type="text" className = {validPhoneNo ? null : invalidClass} defaultValue = {values.phoneNo} onChange = {handleChange('phoneNo')} required/>
-                        {validPhoneNo ? null : invalidPhoneNoMsg}
-                     </Form.Group>
-                     <Form.Group>
-                        <Form.Label>Address</Form.Label>
-                        <Form.Control as="textarea" rows='3' defaultValue={values.address} onChange = {handleChange('adress')} required/>
-                     </Form.Group>
-                     <Form.Group >
-                        <Form.Label>Pickup Time</Form.Label>
-                        <Form.Control as="select" required value = {values.time} onChange = {handleChange('time')}>
-                           <option value='8'>8:00 a.m. - 10:00 a.m.</option>
-                           <option value='10'>10:00 a.m. - 12:00 p.m.</option>
-                           <option value='12'>12:00 p.m. - 2:00 p.m.</option>
-                           <option value='14'>2:00 p.m. - 4:00 p.m.</option>
-                           <option value='16'>4:00 p.m. - 6:00 p.m.</option>
-                           <option value='18'>6:00 p.m. - 8:00 p.m.</option>
-                        </Form.Control>
-                     </Form.Group>
-                     <br />
-                     <Button variant="success" type="submit" block>
-                        Continue
-                     </Button>
+               <Card.Body>
+                  <Card.Title className='text-center'>
+                     Shedule a pickup
+                  </Card.Title>
+                  <Form.Group>
+                     <Form.Label>Mobile Number</Form.Label>
+                     <Form.Control type="text" className = {validPhoneNo ? null : invalidClass} defaultValue = {values.phoneNo} onChange = {handleChange('phoneNo')} required/>
+                     {validPhoneNo ? null : invalidPhoneNoMsg}
+                  </Form.Group>
+                  <Form.Group>
+                     <Form.Label>Address</Form.Label>
+                     <Form.Control as="textarea" rows='3' defaultValue={values.address} onChange = {handleChange('adress')} required/>
+                  </Form.Group>
+                  <Form.Group >
+                     <Form.Label>Pickup Time</Form.Label>
+                     <Form.Control as="select" className = {validTime ? null : invalidClass} required value={values.time} onChange = {handleChange('time')}>
+                        <option value='8'>8:00 a.m. - 10:00 a.m.</option>
+                        <option value='10'>10:00 a.m. - 12:00 p.m.</option>
+                        <option value='12'>12:00 p.m. - 2:00 p.m.</option>
+                        <option value='14'>2:00 p.m. - 4:00 p.m.</option>
+                        <option value='16'>4:00 p.m. - 6:00 p.m.</option>
+                        <option value='18'>6:00 p.m. - 8:00 p.m.</option>
+                     </Form.Control>
+                  </Form.Group>
+                  <br />
+                  <Button variant="success" type="submit" block>
+                     Continue
+                  </Button>
                </Card.Body>
             </Form>
          </Card>
