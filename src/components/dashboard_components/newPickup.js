@@ -39,19 +39,16 @@ class NewPickup extends Component {
          if (res.statusCode==='S2000') {
             this.setState({phoneNo: res.phone});
             let address = res.address.address1 + ' ' + res.address.address2 + ' ' + res.address.city;
-            this.setState({address: address}); 
+            this.setState({address: address});
          }
       })
    }
-   
+
    componentDidMount(){
       this.handleUserData();
    }
-    
-   
+
    render() {
-
-
       const { step } = this.state;
       const {time, phoneNo, address, date} = this.state;
       const values = {time, phoneNo, address, date};
@@ -68,17 +65,17 @@ class NewPickup extends Component {
          case 2:
          return (
             <FormPickupAgree
-                nextStep = {this.nextStep}
-                prevStep = {this.prevStep}
-                />
+               nextStep = {this.nextStep}
+               prevStep = {this.prevStep}
+               />
 
          )
          case 3:
          return (
             <Confirm
-                values = {values}
-                prevStep = {this.prevStep}
-                />
+               values = {values}
+               prevStep = {this.prevStep}
+               />
          );
       }
    }
