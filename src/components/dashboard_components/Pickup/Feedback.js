@@ -71,7 +71,7 @@ class Feedback extends Component {
                   <div style={{paddingLeft:'10px'}}>
                      Make your feedback on pickup #{pickupId}
                      <br></br>
-                     <Rating rating={rating} handleChange = {this.handleChange} />
+                     <Rating rating={rating} handleChange = {this.handleChange} size = {'36px'} />
                   </div>
                </Modal.Body>
                <Modal.Footer>

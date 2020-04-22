@@ -7,11 +7,14 @@ import { getUserData } from './UserFunctions';
 
 
 class NewPickup extends Component {
+
+
    state = {
       step: 1,
       time:'',
       phoneNo:'',
       address:'',
+      municipalCouncil:'',
    };
 
    nextStep = () => {
@@ -40,6 +43,7 @@ class NewPickup extends Component {
             this.setState({phoneNo: res.phone});
             let address = res.address.address1 + ' ' + res.address.address2 + ' ' + res.address.city;
             this.setState({address: address});
+            this.setState({municipalCouncil: res.address.municipalCouncil});
          }
       })
    }
@@ -50,8 +54,8 @@ class NewPickup extends Component {
 
    render() {
       const { step } = this.state;
-      const {time, phoneNo, address, date} = this.state;
-      const values = {time, phoneNo, address, date};
+      const {time, phoneNo, address, date, municipalCouncil} = this.state;
+      const values = {time, phoneNo, address, date, municipalCouncil};
 
       switch(step) {
          case 1:
