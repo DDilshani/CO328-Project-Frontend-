@@ -21,10 +21,12 @@ class PickupListItem extends Component {
             renderPickupOption(s, pickupId, rating){
                if(this.props.pickupState==='PENDING'){
                   return <Delete pickupId={pickupId}/>
-               }else if(rating==null){
+               }else if(rating!="null"){
+                  // Not rated
                   return <Feedback pickupId={pickupId}></Feedback>
-               }else{
-                  return <p>Rating: {rating}</p>
+               //}else{
+               //    already rated
+               //   return <p>Rating: {rating}</p>
                }
             }
             render() {
@@ -50,6 +52,7 @@ class PickupListItem extends Component {
             pickupState: PropTypes.string.isRequired,
             pickupTime:PropTypes.string.isRequired,
             pickupDate:PropTypes.string.isRequired,
+            rating: PropTypes.number.isRequired,
          }
 
          export default PickupListItem;
