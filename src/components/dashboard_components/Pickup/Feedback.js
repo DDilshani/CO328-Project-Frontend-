@@ -50,8 +50,6 @@ class Feedback extends Component {
             console.log('Error')
          }
       })
-
-
    }
 
    render() {

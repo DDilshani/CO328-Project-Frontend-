@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { login } from './../registration_components/UserFunctions';
+import { login,setUserToken } from './../registration_components/UserFunctions';
 import { Button, Form, Card,Alert } from 'react-bootstrap';
 
 class Login extends Component {
@@ -45,7 +45,8 @@ class Login extends Component {
             console.log(statusCode);
             if(statusCode === 'S2000'){
                console.log(res.authToken);
-               localStorage.setItem('usertoken', res.authToken);
+               //localStorage.setItem('usertoken', res.authToken);
+               setUserToken(res.authToken);
                this.setState({validInput: true, validServer :true});
                window.location.href = '/home';
             }

@@ -6,10 +6,11 @@ class Navigationbar extends Component {
    logOut(e) {
       e.preventDefault()
       localStorage.removeItem('usertoken')
-      this.props.history.push(`/`)
+      this.props.history.push(`/login`)
    }
 
    render() {
+
       const loginRegLink = (
          <Nav>
             <Nav.Link>
