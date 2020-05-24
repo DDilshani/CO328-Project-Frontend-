@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x]
+        node-version: [10.x]
     steps:
     - uses: actions/checkout@v1
     - name: Use Node.js ${{ matrix.node-version }}
@@ -18,6 +18,8 @@ jobs:
     - name: Install Packages
       run: npm install
     - name: Deploy to GH Pages
-      run: npm run deploy
-    - name: Updating Domain
-      run: echo "Update domain"
+      run: |
+        git config --global user.email "nuwanjaliyagoda@gmail.com"
+        git config --global user.name "NuwanJ"
+        git remote set-url origin https://86e33b412a8339fc5a1580c4164bac139933b49d@github.com/NuwanJ>/your_repo>.git
+        npm run deploy
