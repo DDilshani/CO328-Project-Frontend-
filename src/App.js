@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import {Link} from 'react-router-dom'
+
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 import Navigationbar from './components/layout/Navigationbar'
 import Login from './components/pages/Login'
 import Register from './components/pages/Register'
@@ -11,7 +14,7 @@ import NewPickup from './components/dashboard_components/newPickup';
 class App extends Component {
    render() {
       return (
-         <Router>
+          <Router basename={process.env.PUBLIC_URL}>
             <div className="App">
                <Navigationbar />
                <Route exact path="/" component={Landing} />

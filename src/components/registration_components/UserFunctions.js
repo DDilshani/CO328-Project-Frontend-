@@ -16,7 +16,7 @@ export const register = newCustomer => {
       municipalCouncil: newCustomer.municipalCouncil,
    };
 
-   return fetch('http://collector.ceykod.com/api/v1/register/', {
+   return fetch('https://collector.ceykod.com/api/v1/register/', {
       method: 'POST',
       headers: {},
       body: JSON.stringify(data)
@@ -39,7 +39,7 @@ export const login = input => {
       password: newCustomer.password
    };
 
-   return fetch('http://collector.ceykod.com/api/v1/login/', {
+   return fetch('https://collector.ceykod.com/api/v1/login/', {
       method: 'POST',
       headers: {},
       body: JSON.stringify(data)

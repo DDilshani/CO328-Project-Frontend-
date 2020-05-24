@@ -9,7 +9,7 @@ export const newPickup = pickup => {
       datatime: pickup.date,
    };
 
-   return fetch('http://collector.ceykod.com/api/v1/pickups/new/', {
+   return fetch('https://collector.ceykod.com/api/v1/pickups/new/', {
       method: 'POST',
       headers: {
          'Authorization': bearer,
@@ -28,7 +28,7 @@ export const newPickup = pickup => {
 export const getUserData = () => {
    let userToken = localStorage.usertoken;
    let bearer = 'Bearer ' + userToken;
-   return fetch('http://collector.ceykod.com/api/v1/getUserData/', {
+   return fetch('https://collector.ceykod.com/api/v1/getUserData/', {
       method: 'GET',
       headers: {
          'Authorization': bearer,
@@ -46,7 +46,7 @@ export const getUserData = () => {
 export const getListItems = () => {
    let userToken = localStorage.usertoken;
    let bearer = 'Bearer ' + userToken;
-   return fetch('http://collector.ceykod.com/api/v1/pickups/list', {
+   return fetch('https://collector.ceykod.com/api/v1/pickups/list', {
       method: 'GET',
       headers: {
          'Authorization': bearer,
@@ -70,7 +70,7 @@ export const ratePickup = pickup => {
       rate: pickup.rate,
    };
 
-   return fetch('http://collector.ceykod.com/api/v1/pickups/rate/', {
+   return fetch('https://collector.ceykod.com/api/v1/pickups/rate/', {
       method: 'POST',
       headers: {
          'Authorization': bearer,
@@ -94,7 +94,7 @@ export const deletePickup = pickup => {
       pickupId: pickup.pickupId,
    };
 
-   return fetch('http://collector.ceykod.com/api/v1/pickups/delete/', {
+   return fetch('https://collector.ceykod.com/api/v1/pickups/delete/', {
       method: 'POST',
       headers: {
          'Authorization': bearer,
