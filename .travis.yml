@@ -2,6 +2,8 @@ language: node_js
 node_js:
   - "node"
 
+script: 'true'
+
 after_success:
   - git config --global user.name "NuwanJ"
   - git config --global user.email "nuwanjaliyagoda@gmail.com"
