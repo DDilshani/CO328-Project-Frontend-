@@ -4,9 +4,9 @@ module.exports = global.config = {
          en: "",
       }
    },
-   backend : 'http://68.183.188.135:5000/',
+   backend : 'https://collector.ceykod.com',
    telco:{
-      tokenVerify: "http://collector.ceykod.com/api/v1/verifyToken/"
+      tokenVerify: "https://collector.ceykod.com/api/v1/verifyToken/"
    },
-   hostURL: "http://collectorapp.ceykod.com"
+   hostURL: "https://collectorapp.ceykod.com"
 };
