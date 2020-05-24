@@ -4,6 +4,9 @@ node_js:
 
 script: 'true'
 
+env:
+  CI: false
+  
 after_success:
   - git config --global user.name "NuwanJ"
   - git config --global user.email "nuwanjaliyagoda@gmail.com"
