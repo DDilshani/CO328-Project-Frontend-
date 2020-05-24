@@ -11,6 +11,8 @@ after_success:
   - git config --global user.name "NuwanJ"
   - git config --global user.email "nuwanjaliyagoda@gmail.com"
   - git remote rm origin
-  - git remote add origin https://nuwanj:${GH_TOKEN}@https://github.com/NuwanJ/CO328-Project-Frontend-.git
+  - git remote add origin https://NuwanJ:f72174ed80dbbe2ae035715916a1bc5edad16845@github.com/NuwanJ/ol3-1.git
   - npm run deploy
   
+  
+ 
