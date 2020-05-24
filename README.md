@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/NuwanJ/CO328-Project-Frontend-.svg?token=fxBxchdsBdnh4oqtda9f&branch=master)](https://travis-ci.com/NuwanJ/CO328-Project-Frontend-)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
