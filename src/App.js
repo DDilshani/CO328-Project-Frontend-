@@ -13,21 +13,9 @@ import NewPickup from './components/dashboard_components/newPickup';
 
 class App extends Component {
 
-   componentDidMount(){
-      // Redirect to requested URL 
-     const queryString = window.location.search;
-     const urlParams = new URLSearchParams(queryString);
-     const page = urlParams.get('p')
-     console.log(page);
-
-     if(page!=null){
-        this.props.history.push(page);
-     }
-  }
-
    render() {
       return (
-          <Router basename={process.env.PUBLIC_URL}>
+         <Router basename={process.env.PUBLIC_URL}>
             <div className="App">
                <Navigationbar />
                <Route exact path="/" component={Landing} />
