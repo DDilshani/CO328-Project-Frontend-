@@ -28,7 +28,7 @@
       "eject": "react-scripts eject"
    },
    "proxy": "https://collector.ceykod.com/",
-   "homepage": "https://nuwanj.github.io/CO328-Project-Frontend-/",
+   "homepage": "http://collectorapp.ceykod.com/",
    "eslintConfig": {
       "extends": "react-app"
    },
