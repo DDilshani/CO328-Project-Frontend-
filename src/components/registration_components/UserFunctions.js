@@ -16,7 +16,7 @@ export const register = newCustomer => {
       municipalCouncil: newCustomer.municipalCouncil,
    };
 
-   return fetch(global.config.backend + 'api/v1/register/', {
+   return fetch(global.config.backend + '/api/v1/register/', {
       method: 'POST',
       headers: {},
       body: JSON.stringify(data)
