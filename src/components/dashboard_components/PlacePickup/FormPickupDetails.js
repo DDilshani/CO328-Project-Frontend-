@@ -4,7 +4,6 @@ import { Button, Form, Card} from 'react-bootstrap';
 class FormPickupDetails extends Component {
    state = {
       validPhoneNo: true,
-      validTime: true
    }
 
    continue (e) {
@@ -19,13 +18,8 @@ class FormPickupDetails extends Component {
          });
          allow = false;
 
-      } else if( !this.validateTime(time)){
-         this.setState({
-            validTime: false
-         });
-         allow = false;
-
-      } else{
+      }
+      else{
          this.setState({
             validPhoneNo: true
          });
@@ -43,17 +37,10 @@ class FormPickupDetails extends Component {
       return false;
    }
 
-   validateTime(time) {
-      if(time.length>0) {
-         return true;
-      }
-      return false;
-   }
-
    render(){
 
       const {values,handleChange} = this.props;
-      const {validPhoneNo, validTime} = this.state;
+      const {validPhoneNo } = this.state;
       const invalidClass = 'is-invalid';
 
       const invalidPhoneNoMsg = (
@@ -77,10 +64,14 @@ class FormPickupDetails extends Component {
                   <Form.Group>
                      <Form.Label>Address</Form.Label>
                      <Form.Control as="textarea" rows='3' defaultValue={values.address} onChange = {handleChange('adress')} required/>
+                     <Form.Text className="text-muted text-alert">
+                        Your services are limited to {values.municipalCouncil} municipal council.
+                     </Form.Text>
                   </Form.Group>
                   <Form.Group >
                      <Form.Label>Pickup Time</Form.Label>
-                     <Form.Control as="select" className = {validTime ? null : invalidClass} required value={values.time} onChange = {handleChange('time')}>
+                     <Form.Control as="select"  required="required" value={values.time} onChange = {handleChange('time')}>
+                        <option hidden value=''>8:00 a.m. - 10:00 a.m.</option>
                         <option value='8'>8:00 a.m. - 10:00 a.m.</option>
                         <option value='10'>10:00 a.m. - 12:00 p.m.</option>
                         <option value='12'>12:00 p.m. - 2:00 p.m.</option>

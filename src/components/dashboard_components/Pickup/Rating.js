@@ -8,13 +8,16 @@ class Rating extends Component {
 
    render() {
 
-      const { rating, handleChange}  = this.props;
+      const { rating, handleChange, size}  = this.props;
 
      return (
-       <BeautyStars
-         value={rating}
-         onChange = {handleChange('rating')}
-       />
+      <div style={{display: 'flex', justifyContent: 'center'}}>
+             <BeautyStars
+              value={rating}
+              onChange = {handleChange('rating')}
+              size = {size}
+            />
+      </div>
      );
    }
 

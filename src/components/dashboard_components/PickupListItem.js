@@ -2,10 +2,15 @@ import React, { Component } from 'react'
 
 import Feedback from './Pickup/Feedback';
 import Delete from './Pickup/Delete';
+import Rating from './Pickup/Rating';
 
 var PropTypes = require('prop-types');
 
 class PickupListItem extends Component {
+
+   handleChange = input => e => {
+      console.log('You already rated');
+   }
 
    renderPickupState(s){
       switch(s) {
@@ -19,14 +24,16 @@ class PickupListItem extends Component {
             }
 
             renderPickupOption(s, pickupId, rating){
+               console.log(pickupId+':'+rating);
                if(this.props.pickupState==='PENDING'){
                   return <Delete pickupId={pickupId}/>
-               }else if(rating!="null"){
-                  // Not rated
-                  return <Feedback pickupId={pickupId}></Feedback>
-               //}else{
-               //    already rated
-               //   return <p>Rating: {rating}</p>
+               }else if(rating){
+                  console.log('This is rated')
+                  return <Rating rating={rating} handleChange = {this.handleChange} size = {'20px'}/>
+               }
+               else {
+                  console.log('This is not rated')
+                  return <Feedback pickupId={pickupId} />
                }
             }
             render() {
