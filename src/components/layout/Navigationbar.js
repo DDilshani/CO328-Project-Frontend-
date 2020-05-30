@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import {Navbar, Nav} from 'react-bootstrap';
+import {Navbar, Nav,NavDropdown} from 'react-bootstrap';
 
 class Navigationbar extends Component {
    logOut(e) {
@@ -29,15 +29,19 @@ class Navigationbar extends Component {
       )
 
       const userLink = (
-         <Nav>
-            <a href="#" onClick={this.logOut.bind(this)} className="nav-link">
-               Logout
-            </a>
+         <Nav >
+            <NavDropdown title={<i className="fa fa-user"></i>} alignRight id="dropdown-menu-align-right">
+               <NavDropdown.Item href="/settings">Settings & Privacy</NavDropdown.Item>
+               <NavDropdown.Divider />
+               <NavDropdown.Item href="#" onClick={this.logOut.bind(this)}>
+                  Logout
+               </NavDropdown.Item>
+            </NavDropdown>
          </Nav>
       )
 
       return (
-         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
             <Navbar.Brand href="#home">Zero Trash</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">

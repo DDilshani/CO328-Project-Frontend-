@@ -12,6 +12,7 @@ class Register extends Component {
       step: 1,
       language: '',
       customerType:  'Regular Customer',
+      municipalCouncil: '',
       firstName: '',
       lastName: '',
       phoneNo: '',
@@ -61,8 +62,8 @@ class Register extends Component {
    render() {
 
       const { step } = this.state;
-      const {firstName, lastName, email, phoneNo, password, confirmPassword, address1, address2, city, regDate, customerType, language} = this.state;
-      const values = {firstName, lastName, email, phoneNo, password, confirmPassword, address1, address2, city, regDate, customerType, language};
+      const {firstName, lastName, email, phoneNo, password, confirmPassword, address1, address2, city, regDate, customerType, language, municipalCouncil} = this.state;
+      const values = {firstName, lastName, email, phoneNo, password, confirmPassword, address1, address2, city, regDate, customerType, language, municipalCouncil};
 
       switch(step) {
          case 1:
