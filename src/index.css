@@ -225,9 +225,8 @@ button:hover{
 }
 
 .sidebar-header {
-  margin-top: 10px;
-  display:flex;
-  justify-content:center;
+  margin-top: 20px;
+  margin-left: 10px;
 
 }
 
@@ -263,3 +262,7 @@ button:hover{
 
 }
 
+.settings .content Table input[type="text"]{
+  width: 250px;
+
+}
