@@ -29,8 +29,14 @@ class Navigationbar extends Component {
       )
 
       const userLink = (
-         <Nav >
-            <NavDropdown title={<i className="fa fa-user"></i>} alignRight id="dropdown-menu-align-right">
+         <Nav>
+            <Nav.Link>
+               <Link to="/home" className="nav-link">
+                  Home
+               </Link>
+            </Nav.Link>
+            <NavDropdown className = "navbar-dropDown-icon"title={<i className="fa fa-user"></i>} alignRight id="dropdown-menu-align-right">
+               <NavDropdown.Item href="/home">Home</NavDropdown.Item>
                <NavDropdown.Item href="/settings">Settings & Privacy</NavDropdown.Item>
                <NavDropdown.Divider />
                <NavDropdown.Item href="#" onClick={this.logOut.bind(this)}>

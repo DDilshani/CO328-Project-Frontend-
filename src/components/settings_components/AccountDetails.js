@@ -117,7 +117,7 @@ class AccountDetails extends Component {
               if(statusCode === 'S2000'){
                  console.log('Success')
                  this.setState({validServer :true});
-                 //window.location.href = '/home';
+                 window.location.href = '/home';
               }
               else if(statusCode === 'E5000'){
                  console.log('Error')
