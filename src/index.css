@@ -262,25 +262,55 @@ button:hover{
 
 }
 
+.settings .content Table .hidden-rows{
+  display: flex;
+  justify-content: center;
+
+}
+
+.settings .content Table td:first-child {
+  width: 390px;
+
+
+}
+
+.settings .content Table .clickable-row:hover{
+  cursor:pointer;
+  
+}
+
+.settings .content Table .clickable-row a{
+  display: flex;
+  justify-content: right;
+  margin-right: 45px;
+  
+}
+
+
 .settings .content Table input[type="text"]{
   width: 250px;
 
 }
 
-.settings .content table .btn-block{
+.settings .content Table input[type="password"]{
+  width: 250px;
+
+}
+
+.settings .content Table .btn-block{
   display: inline-block;
   height: 25px;
   width: 250px;
 }
 
-.settings .content table .btn-block button{
+.settings .content Table .btn-block button{
   margin-top: 0px;
   font-size: 10px;
   height: 30px;
   width: 80px;
 }
 
-.settings .content table .btn-block button[type="submit"]{
+.settings .content Table .btn-block button[type="submit"]{
   margin-right: 10px;
   width: 150px;
 }
@@ -293,18 +323,18 @@ button:hover{
   display: flex;
   justify-content: center;
 }
-.settings .content table .btn-block-apply button{
+.settings .content Table .btn-block-apply button{
   width: 200px;
   height: 35px;
   margin: 0px;
 }
 
-.settings .content table .btn-block-apply button[type="submit"]{
+.settings .content Table .btn-block-apply button[type="submit"]{
   width: 200px;
   margin-right: 10px;
 }
 
-.settings .content table .alert-block{
+.settings .content Table .alert-block{
   display: flex;
   justify-content: center;
 }

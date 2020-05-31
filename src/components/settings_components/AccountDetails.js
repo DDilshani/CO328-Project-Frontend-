@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getUserData,change } from './UserFunctions'
+import { getUserData,changeDetails } from './UserFunctions'
 import Table from 'react-bootstrap/Table'
 import { Form ,Button,Alert } from 'react-bootstrap';
 
@@ -43,6 +43,12 @@ class AccountDetails extends Component {
                 this.setState({municipalCouncil: res.address.municipalCouncil});
                 this.setState({language: res.language});
             }
+            else {
+                this.setState({validServer: false});
+            }
+        }).catch(err => {
+            this.setState({validServer: false})
+            console.log(err)
         })
     }
 
@@ -110,7 +116,7 @@ class AccountDetails extends Component {
            municipalCouncil: municipalCouncil,
         }
         console.log(customer);
-        change(customer).then(res => {
+        changeDetails(customer).then(res => {
            if (res) {
               let statusCode = res.statusCode;
               console.log(statusCode);
@@ -298,14 +304,14 @@ class AccountDetails extends Component {
                     {(displayRow == 4)? updateLanguage : null}
                 </tbody>
                 <tr>
-                    <td colspan="2">
+                    <td colspan="3">
                         <div className="alert-block">
                             {validServer? null : invalidServerMsg}
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
+                    <td colspan="3">
                         <div className="btn-block-apply">
                             <Button variant="success" onClick = {e => this.applyChanges(e)} type="submit" block>
                                 Apply Changes

@@ -25,7 +25,7 @@ class SideBar extends React.Component {
 
           <Nav.Item>
             <Nav.Link href="#" onClick={ () => this.nextStep(2) } >
-              Privacy
+              Security and Login
             </Nav.Link>
           </Nav.Item>
 
