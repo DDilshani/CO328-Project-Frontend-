@@ -1,22 +1,25 @@
 import React, { Component } from 'react'
-import { getUserData } from './UserFunctions'
+import { getUserData,change } from './UserFunctions'
 import Table from 'react-bootstrap/Table'
-import { Form } from 'react-bootstrap';
+import { Form ,Button,Alert } from 'react-bootstrap';
 
 class AccountDetails extends Component {
 
 
     state = {
         step: 1,
-        first_name: '',
-        last_name: '',
+        firstName: '',
+        lastName: '',
         address1:'',
         address2:'',
         city: '',
+        language: '',
         phoneNo:'',
         email: '',
         municipalCouncil: '',
+        prevDetails: null,
         displayRow : 0,
+        validServer: true,
     };
 
     handleChange = input => e => {
@@ -29,14 +32,16 @@ class AccountDetails extends Component {
    handleUserData = () => {
         getUserData().then(res => {
             if (res.statusCode==='S2000') {
-                this.setState({first_name: res.first_name});
-                this.setState({last_name: res.last_name});
+                this.setState({prevDetails: res});
+                this.setState({firstName: res.firstName});
+                this.setState({lastName: res.lastName});
                 this.setState({phoneNo: res.phone});
                 this.setState({email: res.email});
                 this.setState({address1: res.address.address1});
                 this.setState({address2: res.address.address2});
                 this.setState({city: res.address.city});
                 this.setState({municipalCouncil: res.address.municipalCouncil});
+                this.setState({language: res.language});
             }
         })
     }
@@ -48,25 +53,119 @@ class AccountDetails extends Component {
         this.setState({displayRow: row});
     }
 
+    changeName = e => {
+        this.setState({
+            firstName: e.target[0].value,
+            lastName: e.target[1].value
+         });
+         this.displayRow(0)
+    }
+
+    changeAddress = e => {
+        this.setState({
+            address1: e.target[0].value,
+            address2: e.target[1].value,
+            city: e.target[2].value,
+         });
+         this.displayRow(0)
+    }
+    changeMunicipal = e => {
+        this.setState({
+            municipalCouncil: e.target[0].value,
+        });
+        this.displayRow(0)
+    }
+
+    changeLanguage = e => {
+        this.setState({
+            language: e.target[0].value,
+        });
+        this.displayRow(0)
+    }
+
+    resetChanges = e => {
+        let res = this.state.prevDetails;
+        this.setState({firstName: res.firstName});
+        this.setState({lastName: res.lastName});
+        this.setState({phoneNo: res.phone});
+        this.setState({email: res.email});
+        this.setState({address1: res.address.address1});
+        this.setState({address2: res.address.address2});
+        this.setState({city: res.address.city});
+        this.setState({municipalCouncil: res.address.municipalCouncil});
+        this.setState({language: res.language});
+    }
+
+    applyChanges = e => {
+        e.preventDefault();
+
+        const {firstName, lastName, address1, address2, city, municipalCouncil,language} = this.state;
+        const customer = {
+           firstName: firstName,
+           lastName: lastName,
+           address1: address1,
+           address2: address2,
+           city: city,
+           language: language,
+           municipalCouncil: municipalCouncil,
+        }
+        console.log(customer);
+        change(customer).then(res => {
+           if (res) {
+              let statusCode = res.statusCode;
+              console.log(statusCode);
+              if(statusCode === 'S2000'){
+                 console.log('Success')
+                 this.setState({validServer :true});
+                 //window.location.href = '/home';
+              }
+              else if(statusCode === 'E5000'){
+                 console.log('Error')
+                 this.setState({validServer : false});
+              }
+           }
+           else{
+               console.log('error');
+              this.setState({validServer: false});
+           }
+        })
+        
+    }
 
     render() {
 
-        const { first_name,last_name, phoneNo, email, municipalCouncil, displayRow,address1,address2,city} = this.state;
-        const full_name = first_name + ' ' + last_name;
+        const { validServer,firstName,lastName, phoneNo, email, municipalCouncil,language ,displayRow,address1,address2,city} = this.state;
+        const full_name = firstName + ' ' + lastName;
         const address = address1+ ' ' + address2+' ' + city;
+
+        const invalidServerMsg = (
+            <Alert variant='danger'>
+               Database error!
+            </Alert>
+        )
 
         const updateName = (
             <tr className = "hidden_rows">
                 <td></td>
                 <td>
-                <Form.Group >
-                     <Form.Label>First Name</Form.Label>
-                     <Form.Control className = "input" type="text"  value = {first_name} onChange = {this.handleChange('first_name')} placeholder={first_name} required/>
-                  </Form.Group>
-                  <Form.Group >
-                     <Form.Label>Last Name</Form.Label>
-                     <Form.Control className = "input" type="text"  value = {last_name} onChange = {this.handleChange('last_name')} placeholder={last_name} required/>
-                  </Form.Group>
+                <Form onSubmit = {e => this.changeName(e)}>
+                    <Form.Group >
+                        <Form.Label>First Name</Form.Label>
+                        <Form.Control className = "input" type="text"  placeholder={firstName} required/>
+                    </Form.Group>
+                    <Form.Group >
+                        <Form.Label>Last Name</Form.Label>
+                        <Form.Control className = "input" type="text" placeholder={lastName} required/>
+                    </Form.Group>
+                    <div className="btn-block">
+                        <Button variant="success" type="submit" block>
+                            Review Change
+                        </Button>
+                        <Button variant="light" onClick={ () => this.displayRow(0) } block>
+                            Cancel
+                        </Button>
+                    </div>
+                </Form>
                 </td>
                 <td></td>
             </tr>
@@ -76,18 +175,28 @@ class AccountDetails extends Component {
             <tr className = "hidden_rows">
                 <td></td>
                 <td>
-                <Form.Group >
-                     <Form.Label>Address 1</Form.Label>
-                     <Form.Control className = "input" type="text"  value = {address1} onChange = {this.handleChange('address1')} placeholder={address1} required/>
-                  </Form.Group>
-                  <Form.Group >
-                     <Form.Label>Address 2</Form.Label>
-                     <Form.Control className = "input" type="text"  value = {address2} onChange = {this.handleChange('address2')} placeholder={address2} required/>
-                  </Form.Group>
-                  <Form.Group >
-                     <Form.Label>City</Form.Label>
-                     <Form.Control className = "input" type="text"  value = {city} onChange = {this.handleChange('city')} placeholder={city} required/>
-                  </Form.Group>
+                <Form onSubmit = {e => this.changeAddress(e)}>
+                    <Form.Group >
+                        <Form.Label>Address 1</Form.Label>
+                        <Form.Control className = "input" type="text" placeholder={address1} required/>
+                    </Form.Group>
+                    <Form.Group >
+                        <Form.Label>Address 2</Form.Label>
+                        <Form.Control className = "input" type="text" placeholder={address2} required/>
+                    </Form.Group>
+                    <Form.Group >
+                        <Form.Label>City</Form.Label>
+                        <Form.Control className = "input" type="text" placeholder={city} required/>
+                    </Form.Group>
+                    <div className="btn-block">
+                        <Button variant="success" type="submit" block>
+                            Review Change
+                        </Button>
+                        <Button variant="light" onClick={ () => this.displayRow(0) } block>
+                            Cancel
+                        </Button>
+                    </div>
+                </Form>
                 </td>
                 <td></td>
             </tr>
@@ -96,17 +205,53 @@ class AccountDetails extends Component {
             <tr className = "hidden_rows">
                 <td></td>
                 <td>
-                <Form.Group>
-                    <Form.Label>Municipal Council</Form.Label>
-                        <Form.Control as="select" value = {municipalCouncil} onChange = {this.handleChange('municipalCouncil')} required>
+                <Form onSubmit = {e => this.changeMunicipal(e)}>
+                    <Form.Group>
+                        <Form.Label>Municipal Council</Form.Label>
+                        <Form.Control className = 'react-select' as="select" placeholder={municipalCouncil} required>
                             <option>Colombo</option>
                             <option>Kandy</option>
                             <option>Bandarawela</option>
                         </Form.Control>
                     </Form.Group>
+                    <div className="btn-block">
+                        <Button variant="success" type="submit" block>
+                            Review Change
+                        </Button>
+                        <Button variant="light" onClick={ () => this.displayRow(0) } block>
+                            Cancel
+                        </Button>
+                    </div>
+                </Form>
                 </td>
                 <td></td>
             </tr>
+        )
+
+        const updateLanguage = (
+            <tr className = "hidden_rows">
+            <td></td>
+            <td>
+            <Form onSubmit = {e => this.changeLanguage(e)}>
+                <Form.Group>
+                    <Form.Label>Language</Form.Label>
+                    <Form.Control className = 'react-select' as="select" placeholder={language} required>
+                        <option>Sinhala</option>
+                        <option>English</option>
+                    </Form.Control>
+                </Form.Group>
+                <div className="btn-block">
+                    <Button variant="success" type="submit" block>
+                        Review Change
+                    </Button>
+                    <Button variant="light" onClick={ () => this.displayRow(0) } block>
+                        Cancel
+                    </Button>
+                </div>
+            </Form>
+            </td>
+            <td></td>
+        </tr>
         )
 
 
@@ -145,7 +290,33 @@ class AccountDetails extends Component {
                         <td><a href='#' onClick={ () => this.displayRow(3) }>Edit</a></td>
                     </tr>
                     {(displayRow == 3)? updateMunicipal : null}
+                    <tr>
+                        <td>language: </td>
+                        <td>{language}</td>
+                        <td><a href='#' onClick={ () => this.displayRow(4) }>Edit</a></td>
+                    </tr>
+                    {(displayRow == 4)? updateLanguage : null}
                 </tbody>
+                <tr>
+                    <td colspan="2">
+                        <div className="alert-block">
+                            {validServer? null : invalidServerMsg}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div className="btn-block-apply">
+                            <Button variant="success" onClick = {e => this.applyChanges(e)} type="submit" block>
+                                Apply Changes
+                            </Button>
+                            <Button variant="light" onClick={ () => this.resetChanges() } block>
+                                Reset
+                            </Button>
+                        </div>
+                    </td>
+
+                </tr>
                 </Table>
         );
     }

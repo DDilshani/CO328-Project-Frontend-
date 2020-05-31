@@ -266,3 +266,45 @@ button:hover{
   width: 250px;
 
 }
+
+.settings .content table .btn-block{
+  display: inline-block;
+  height: 25px;
+  width: 250px;
+}
+
+.settings .content table .btn-block button{
+  margin-top: 0px;
+  font-size: 10px;
+  height: 25px;
+  width: 80px;
+}
+
+.settings .content table .btn-block button[type="submit"]{
+  margin-right: 10px;
+  width: 150px;
+}
+
+.settings .content Table .react-select{
+  width: 250px;
+}
+
+.settings .content .btn-block-apply{
+  display: flex;
+  justify-content: center;
+}
+.settings .content table .btn-block-apply button{
+  width: 200px;
+  height: 35px;
+  margin: 0px;
+}
+
+.settings .content table .btn-block-apply button[type="submit"]{
+  width: 200px;
+  margin-right: 10px;
+}
+
+.settings .content table .alert-block{
+  display: flex;
+  justify-content: center;
+}
