@@ -10,6 +10,7 @@ import Register from './components/pages/Register'
 import Landing from './components/pages/Landing'
 import Dashboard from './components/dashboard_components/Dashboard';
 import NewPickup from './components/dashboard_components/newPickup';
+import Settings from './components/pages/Settings';
 
 class App extends Component {
 
@@ -24,6 +25,7 @@ class App extends Component {
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/home" component={Dashboard} />
                   <Route path="/newPickup" component={NewPickup} />
+                  <Route path="/settings" component={Settings} />
                </div>
             </div>
          </Router>

@@ -49,7 +49,7 @@ export class FormPasswords extends Component {
    //password length must be [7,15], Must contain at least one numeric digit and a special character
    validatePassword(password) {
 
-      let regPassword=  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+      let regPassword=  /^(?=.*[0-9])[a-zA-Z0-9]{7,15}$/;
       if(password.match(regPassword)) {
          console.log('Correct'+ password)
          return true;
@@ -66,7 +66,7 @@ export class FormPasswords extends Component {
       const invalidPasswordMsg = (
          <Form.Text className="text-muted text-alert">
             Password must contain 7 to 15 characters including atleast 1 numeric
-            character and atleast 1 special character.
+            character.
          </Form.Text>
       )
 

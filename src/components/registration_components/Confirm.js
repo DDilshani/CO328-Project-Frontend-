@@ -13,7 +13,6 @@ export class Confirm extends Component {
       e.preventDefault();
 
       const { values: {firstName, lastName, phoneNo, email, customerType, password, address1, address2, city, regDate, language, municipalCouncil} } = this.props;
-      console.log(this.props.values);
       const customer = {
          firstName: firstName,
          lastName: lastName,
