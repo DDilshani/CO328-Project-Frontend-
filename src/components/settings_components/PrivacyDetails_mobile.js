@@ -8,7 +8,8 @@ class PrivacyDetails_mobile extends Component {
 
     state = {
         displayRow : 0,
-        validServer: true,
+        validInput: true,
+        invalidMsg: '',
         validPassword: true,
         validConfirmPassword: true
     };
@@ -69,14 +70,12 @@ class PrivacyDetails_mobile extends Component {
                      this.setState({validServer :true});
                      window.location.href = '/home';
                   }
-                  else if(statusCode === 'E5000'){
-                     console.log('Error')
-                     this.setState({validServer : false});
+                  else {
+                    this.setState({validInput: false, invalidMsg: res.error});
                   }
                }
                else{
-                   console.log('error');
-                  this.setState({validServer: false});
+                    console.log('error');
                }
             })
             this.displayRow(0)
@@ -94,11 +93,12 @@ class PrivacyDetails_mobile extends Component {
         console.log('Incorrect' + password)
         return false;
      }
+     
      nextStep = step => {
         this.props.nextStep(step);
     }
     render() {
-        const { validServer,displayRow,validPassword,validConfirmPassword } = this.state;
+        const { validInput,invalidMsg,displayRow,validPassword,validConfirmPassword } = this.state;
         const invalidPasswordMsg = (
             <Form.Text className="text-muted text-alert">
                Password must contain 7 to 15 characters including atleast 1 numeric
@@ -112,11 +112,11 @@ class PrivacyDetails_mobile extends Component {
             </Form.Text>
         )
 
-        const invalidServerMsg = (
-            <Alert variant='danger'>
-               Database error!
-            </Alert>
-        )
+        const msg = (
+            <div class="alert alert-danger" role="alert">
+               {invalidMsg}
+            </div>
+         )
         const invalidClass = 'is-invalid';
 
         
@@ -166,7 +166,7 @@ class PrivacyDetails_mobile extends Component {
                 <tr>
                     <td>
                         <div className="alert-block">
-                            {validServer? null : invalidServerMsg}
+                            {validInput? null : msg}
                         </div>
                     </td>
                 </tr>

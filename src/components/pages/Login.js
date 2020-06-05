@@ -8,7 +8,7 @@ class Login extends Component {
       username: '',
       password: '',
       validInput: true,
-      validServer: true,
+      invalidMsg: '',
       rememberMe: false,
    }
 
@@ -47,20 +47,15 @@ class Login extends Component {
                console.log(res.authToken);
                //localStorage.setItem('usertoken', res.authToken);
                setUserToken(res.authToken);
-               this.setState({validInput: true, validServer :true});
+               this.setState({validInput: true});
                window.location.href = '/home';
             }
-            else if(statusCode === 'E4001'){
-               console.log('Wrong')
-               this.setState({validInput: false, validServer : true});
-            }
-            else if(statusCode === 'E5000' || statusCode === 'E5003'){
-               console.log('Error')
-               this.setState({validInput: true, validServer : false});
+            else {
+               this.setState({validInput: false, invalidMsg: res.error});
             }
          }
-         else{
-            this.setState({validServer: false});
+         else {
+            console.log('Error');
          }
       })
    }
@@ -78,15 +73,10 @@ class Login extends Component {
    render() {
       const values = this.state;
 
-      const invalidInputMsg = (
+      const msg = (
          <div class="alert alert-danger" role="alert">
-            Invalid mobile number or password!
+            {values.invalidMsg}
          </div>
-      )
-      const invalidServerMsg = (
-         <Alert variant='danger'>
-            Database error!
-         </Alert>
       )
 
       return (
@@ -105,7 +95,7 @@ class Login extends Component {
                      <Form.Control type="password" value = {values.password} onChange = {this.handleChange('password')} placeholder="Enter password" required />
                   </Form.Group>
                   <br />
-                  {values.validServer? (values.validInput? null : invalidInputMsg) : invalidServerMsg}
+                  {values.validInput? null : msg}
                   <Button variant="success" type="submit" block>
                      Continue
                   </Button>
