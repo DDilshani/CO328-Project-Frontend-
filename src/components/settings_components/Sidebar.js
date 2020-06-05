@@ -9,8 +9,9 @@ class SideBar extends React.Component {
 
   render() {
 
+
     return (
-      <div className="sidebar">
+      <div className="sidebar" id="sidebar-id">
         <div className="sidebar-header">
           <h3>Settings</h3>
         </div>

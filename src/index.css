@@ -213,6 +213,7 @@ button:hover{
   overflow: auto;
 }
 .settings .sidebar {
+
   border-right:  1px solid #ADB0B3;
   float:left;
   height: 100%;
@@ -247,9 +248,43 @@ button:hover{
   position: relative;
   margin-top: 90px;
   margin-left: 20px;
+  margin-right: 20px;
   width: 100%;
 
 } 
+.settings .contentMenu-mobile {
+  margin-top: 50px;
+  width: 100%;
+}
+.settings .contentMenu-mobile a {
+  color: black;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.settings .contentMenu-mobile a:hover{
+  border-right:  5px solid #ADB0B3;
+  color: black;
+  font-size: 18px;
+}
+
+.settings .content-mobile {
+  width: 100%;
+  margin-top: 70px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.settings .content-mobile h4{
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.settings .content-mobile Table tr td{
+  width: 100%;
+}
+.settings .content-mobile Table tr:hover{
+  cursor: pointer;
+}
+
 .settings .content Table {
   display: table;
   width: 100%
@@ -274,12 +309,12 @@ button:hover{
 
 }
 
-.settings .content Table .clickable-row:hover{
+.settings .content Table tr:hover{
   cursor:pointer;
   
 }
 
-.settings .content Table .clickable-row a{
+.settings .content Table tr a{
   display: flex;
   justify-content: right;
   margin-right: 45px;

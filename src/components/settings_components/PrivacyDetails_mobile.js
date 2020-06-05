@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table'
 import { changePasswordDetails } from './UserFunctions'
 import { Form ,Button,Alert } from 'react-bootstrap';
 
-class PrivacyDetails extends Component {
+class PrivacyDetails_mobile extends Component {
 
 
     state = {
@@ -94,7 +94,9 @@ class PrivacyDetails extends Component {
         console.log('Incorrect' + password)
         return false;
      }
-
+     nextStep = step => {
+        this.props.nextStep(step);
+    }
     render() {
         const { validServer,displayRow,validPassword,validConfirmPassword } = this.state;
         const invalidPasswordMsg = (
@@ -120,7 +122,6 @@ class PrivacyDetails extends Component {
         
         const updatePassword = (
             <tr className = "hidden_rows">
-            <td></td>
             <td>
                 <Form onSubmit = {e => this.changePassword(e)}>
                         <Form.Group >
@@ -147,7 +148,6 @@ class PrivacyDetails extends Component {
                         </div>
                 </Form>
             </td>
-            <td></td>
         </tr>
         )
 
@@ -155,26 +155,34 @@ class PrivacyDetails extends Component {
         return (
                 <Table striped borderless hover>
                 <div className="table-header">
-                    <h3>Security & Login</h3>
+                    <h4>Security & Login</h4>
                 </div>
                 <tbody>
                     <tr onClick={ () => this.displayRow(1) }>
                         <td>Change Password</td>
-                        <td></td>
-                        <td><a href='#' onClick={ () => this.displayRow(1) }>Edit</a></td>
                     </tr>
                     {(displayRow == 1)? updatePassword : null}
                 </tbody>
                 <tr>
-                    <td colspan="3">
+                    <td>
                         <div className="alert-block">
                             {validServer? null : invalidServerMsg}
                         </div>
                     </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div className="btn-block-apply">
+                            <Button variant="light" onClick={ () => this.nextStep(1) }  block>
+                                Back
+                            </Button>
+                        </div>
+                    </td>
+
                 </tr>
                 </Table>
         );
     }
 }
 
-export default PrivacyDetails;
+export default PrivacyDetails_mobile;

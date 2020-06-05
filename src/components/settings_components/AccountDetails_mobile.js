@@ -3,7 +3,7 @@ import { getUserData,changeDetails } from './UserFunctions'
 import Table from 'react-bootstrap/Table'
 import { Form ,Button,Alert } from 'react-bootstrap';
 
-class AccountDetails extends Component {
+class AccountDetails_mobile extends Component {
     state = {
         step: 1,
         firstName: '',
@@ -136,11 +136,13 @@ class AccountDetails extends Component {
         
     }
 
+    nextStep = step => {
+        this.props.nextStep(step);
+    }
+
     render() {
 
-        const { validServer,firstName,lastName, phoneNo, email, municipalCouncil,language ,displayRow,address1,address2,city} = this.state;
-        const full_name = firstName + ' ' + lastName;
-        const address = address1+ ' ' + address2+' ' + city;
+        const { validServer,firstName,lastName, municipalCouncil,language ,displayRow,address1,address2,city} = this.state;
 
         const invalidServerMsg = (
             <Alert variant='danger'>
@@ -150,7 +152,6 @@ class AccountDetails extends Component {
 
         const updateName = (
             <tr className = "hidden_rows">
-                <td></td>
                 <td>
                 <Form onSubmit = {e => this.changeName(e)}>
                     <Form.Group >
@@ -163,7 +164,7 @@ class AccountDetails extends Component {
                     </Form.Group>
                     <div className="btn-block">
                         <Button variant="success" type="submit" block>
-                            Review Change
+                            Confirm
                         </Button>
                         <Button variant="light" onClick={ () => this.displayRow(0) } block>
                             Cancel
@@ -171,13 +172,11 @@ class AccountDetails extends Component {
                     </div>
                 </Form>
                 </td>
-                <td></td>
             </tr>
         )
 
         const updataAddress = (
             <tr className = "hidden_rows">
-                <td></td>
                 <td>
                 <Form onSubmit = {e => this.changeAddress(e)}>
                     <Form.Group >
@@ -194,7 +193,7 @@ class AccountDetails extends Component {
                     </Form.Group>
                     <div className="btn-block">
                         <Button variant="success" type="submit" block>
-                            Review Change
+                            Confirm
                         </Button>
                         <Button variant="light" onClick={ () => this.displayRow(0) } block>
                             Cancel
@@ -202,12 +201,10 @@ class AccountDetails extends Component {
                     </div>
                 </Form>
                 </td>
-                <td></td>
             </tr>
         )
         const updateMunicipal = (
             <tr className = "hidden_rows">
-                <td></td>
                 <td>
                 <Form onSubmit = {e => this.changeMunicipal(e)}>
                     <Form.Group>
@@ -220,7 +217,7 @@ class AccountDetails extends Component {
                     </Form.Group>
                     <div className="btn-block">
                         <Button variant="success" type="submit" block>
-                            Review Change
+                            Confirm
                         </Button>
                         <Button variant="light" onClick={ () => this.displayRow(0) } block>
                             Cancel
@@ -228,13 +225,11 @@ class AccountDetails extends Component {
                     </div>
                 </Form>
                 </td>
-                <td></td>
             </tr>
         )
 
         const updateLanguage = (
             <tr className = "hidden_rows">
-            <td></td>
             <td>
             <Form onSubmit = {e => this.changeLanguage(e)}>
                 <Form.Group>
@@ -246,7 +241,7 @@ class AccountDetails extends Component {
                 </Form.Group>
                 <div className="btn-block">
                     <Button variant="success" type="submit" block>
-                        Review Change
+                        Confirm
                     </Button>
                     <Button variant="light" onClick={ () => this.displayRow(0) } block>
                         Cancel
@@ -254,68 +249,51 @@ class AccountDetails extends Component {
                 </div>
             </Form>
             </td>
-            <td></td>
         </tr>
         )
 
 
         return (
-
                 <Table striped borderless hover>
                 <div className="table-header">
-                    <h3>Account Details</h3>
+                    <h4>Account Details</h4>
                 </div>
                 <tbody>
                     <tr onClick={ () => this.displayRow(1) }>
-                        <td id="td-name">Name: </td>
-                        <td>{full_name}</td>
-                        <td><a href='#' onClick={ () => this.displayRow(1) }>Edit</a></td>
+                        <td>Change name</td>
                     </tr>
                     {(displayRow == 1)? updateName : null}
-                    <tr id="tr-email">
-                        <td>email: </td>
-                        <td>{email}</td>
-                        <td></td>
-                    </tr>
-                    <tr id="tr-phone">
-                        <td>Mobile No: </td>
-                        <td>{phoneNo}</td>
-                        <td></td>
-                    </tr>
                     <tr onClick={ () => this.displayRow(2) }>
-                        <td id="td-address">Address: </td>
-                        <td>{address}</td>
-                        <td><a href='#' onClick={ () => this.displayRow(2) }>Edit</a></td>
+                        <td>Change address</td>
                     </tr>
                     {(displayRow == 2)? updataAddress : null}
                     <tr onClick={ () => this.displayRow(3) }>
-                        <td id="td-municipal">Municipal Council: </td>
-                        <td>{municipalCouncil}</td>
-                        <td><a href='#' onClick={ () => this.displayRow(3) }>Edit</a></td>
+                        <td>Change municipal council</td>
                     </tr>
                     {(displayRow == 3)? updateMunicipal : null}
                     <tr onClick={ () => this.displayRow(4) }>
-                        <td id="td-language">language: </td>
-                        <td>{language}</td>
-                        <td><a href='#' onClick={ () => this.displayRow(4) }>Edit</a></td>
+                        <td>Change language</td>
                     </tr>
                     {(displayRow == 4)? updateLanguage : null}
                 </tbody>
                 <tr>
-                    <td colspan="3">
+                    <td>
                         <div className="alert-block">
                             {validServer? null : invalidServerMsg}
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3">
+                    <td>
                         <div className="btn-block-apply">
                             <Button variant="success" onClick = {e => this.applyChanges(e)} type="submit" block>
                                 Apply Changes
                             </Button>
                             <Button variant="light" onClick={ () => this.resetChanges() } block>
                                 Reset
+                            </Button>
+                            <Button variant="light" onClick={ () => this.nextStep(1) }  block>
+                                Back
                             </Button>
                         </div>
                     </td>
@@ -326,4 +304,4 @@ class AccountDetails extends Component {
     }
 }
 
-export default AccountDetails;
+export default AccountDetails_mobile;
