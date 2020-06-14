@@ -43,6 +43,14 @@ export class FormAddressDetails extends Component {
                                 <option>Colombo</option>
                                 <option>Kandy</option>
                                 <option>Bandarawela</option>
+                                <option>Gampola</option>
+                                <option>Rathnapura</option>
+                                <option>Nugegoda</option>
+                                <option>Malambe</option>
+                                <option>Galle</option>
+                                <option>Kadawatha</option>
+                                <option>Battaramulla</option>
+                                <option>Badulla</option>
                             </Form.Control>
                         </Form.Group>
                         <br />
