@@ -31,20 +31,20 @@ class Dashboard extends Component {
    handleListItems = () => {
       getListItems().then(res => {
          if (res.statusCode==='S2000') {
-            let list = [];
-            for(let i=0; i<res.data.length;++i){
-               let date = res.data[i].placedOn.split(" ");
-               let time = this.getPickupTime(res.data[i].timeSlot);
-               let item = {
-                  pickupState: res.data[i].state,
-                  pickupId: parseInt(res.data[i].id),
-                  pickupDate: date[0],
-                  pickupTime: time,
-                  rating: parseInt(res.data[i].rating)
+               let list = [];
+               for(let i=0; i<res.data.length;++i){
+                  let date = res.data[i].placedOn.split(" ");
+                  let time = this.getPickupTime(res.data[i].timeSlot);
+                  let item = {
+                     pickupState: res.data[i].state,
+                     pickupId: parseInt(res.data[i].id),
+                     pickupDate: date[0],
+                     pickupTime: time,
+                     rating: parseInt(res.data[i].rating)
+                  }
+                  list.push(item);
                }
-               list.push(item);
-            }
-            this.setState({list: list});
+               this.setState({list: list});
          }
       })
    }

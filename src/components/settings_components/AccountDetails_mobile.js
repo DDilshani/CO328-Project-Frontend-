@@ -17,7 +17,8 @@ class AccountDetails_mobile extends Component {
         municipalCouncil: '',
         prevDetails: null,
         displayRow : 0,
-        validServer: true,
+        validInput: true,
+        invalidMsg: '',
     };
 
     handleChange = input => e => {
@@ -42,10 +43,9 @@ class AccountDetails_mobile extends Component {
                 this.setState({language: res.language});
             }
             else {
-                this.setState({validServer: false});
+                this.setState({validInput: false, invalidMsg: res.error});
             }
         }).catch(err => {
-            this.setState({validServer: false})
             console.log(err)
         })
     }
@@ -123,14 +123,12 @@ class AccountDetails_mobile extends Component {
                  this.setState({validServer :true});
                  window.location.href = '/home';
               }
-              else if(statusCode === 'E5000'){
-                 console.log('Error')
-                 this.setState({validServer : false});
+              else {
+                this.setState({validInput: false, invalidMsg: res.error});
               }
            }
            else{
                console.log('error');
-              this.setState({validServer: false});
            }
         })
         
@@ -142,13 +140,13 @@ class AccountDetails_mobile extends Component {
 
     render() {
 
-        const { validServer,firstName,lastName, municipalCouncil,language ,displayRow,address1,address2,city} = this.state;
+        const { validInput,invalidMsg,firstName,lastName, municipalCouncil,language ,displayRow,address1,address2,city} = this.state;
 
-        const invalidServerMsg = (
-            <Alert variant='danger'>
-               Database error!
-            </Alert>
-        )
+        const msg = (
+            <div class="alert alert-danger" role="alert">
+               {invalidMsg}
+            </div>
+         )
 
         const updateName = (
             <tr className = "hidden_rows">
@@ -279,7 +277,7 @@ class AccountDetails_mobile extends Component {
                 <tr>
                     <td>
                         <div className="alert-block">
-                            {validServer? null : invalidServerMsg}
+                            {validInput? null : msg}
                         </div>
                     </td>
                 </tr>

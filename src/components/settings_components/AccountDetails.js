@@ -17,7 +17,8 @@ class AccountDetails extends Component {
         municipalCouncil: '',
         prevDetails: null,
         displayRow : 0,
-        validServer: true,
+        validInput: true,
+        invalidMsg: '',
     };
 
     handleChange = input => e => {
@@ -30,6 +31,7 @@ class AccountDetails extends Component {
    handleUserData = () => {
         getUserData().then(res => {
             if (res.statusCode==='S2000') {
+                this.setState({validInput: true});
                 this.setState({prevDetails: res});
                 this.setState({firstName: res.firstName});
                 this.setState({lastName: res.lastName});
@@ -42,11 +44,10 @@ class AccountDetails extends Component {
                 this.setState({language: res.language});
             }
             else {
-                this.setState({validServer: false});
+                this.setState({validInput: false, invalidMsg: res.error});
             }
         }).catch(err => {
-            this.setState({validServer: false})
-            console.log(err)
+            
         })
     }
 
@@ -118,19 +119,17 @@ class AccountDetails extends Component {
            if (res) {
               let statusCode = res.statusCode;
               console.log(statusCode);
-              if(statusCode === 'S2000'){
+              if(statusCode === 'S1000'){
                  console.log('Success')
                  this.setState({validServer :true});
                  window.location.href = '/home';
               }
-              else if(statusCode === 'E5000'){
-                 console.log('Error')
-                 this.setState({validServer : false});
+              else {
+                this.setState({validInput: false, invalidMsg: res.error});
               }
            }
            else{
-               console.log('error');
-              this.setState({validServer: false});
+                console.log('error');
            }
         })
         
@@ -138,15 +137,15 @@ class AccountDetails extends Component {
 
     render() {
 
-        const { validServer,firstName,lastName, phoneNo, email, municipalCouncil,language ,displayRow,address1,address2,city} = this.state;
+        const { validInput,invalidMsg,firstName,lastName, phoneNo, email, municipalCouncil,language ,displayRow,address1,address2,city} = this.state;
         const full_name = firstName + ' ' + lastName;
         const address = address1+ ' ' + address2+' ' + city;
 
-        const invalidServerMsg = (
-            <Alert variant='danger'>
-               Database error!
-            </Alert>
-        )
+        const msg = (
+            <div class="alert alert-danger" role="alert">
+               {invalidMsg}
+            </div>
+         )
 
         const updateName = (
             <tr className = "hidden_rows">
@@ -304,7 +303,7 @@ class AccountDetails extends Component {
                 <tr>
                     <td colspan="3">
                         <div className="alert-block">
-                            {validServer? null : invalidServerMsg}
+                            {validInput? null : msg}
                         </div>
                     </td>
                 </tr>
