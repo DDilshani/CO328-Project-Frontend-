@@ -11,6 +11,8 @@ class Feedback extends Component {
    state = {
       show: false,
       rating: '',
+      validInput: true,
+      invalidMsg: '',
    }
 
    feedback() {
@@ -42,8 +44,8 @@ class Feedback extends Component {
                console.log('Success')
                window.location.href = '/home';
             }
-            else if(statusCode === 'E5000'){
-               console.log('Error')
+            else {
+               this.setState({validInput: false, invalidMsg: res.error});
             }
          }
          else{
@@ -55,7 +57,13 @@ class Feedback extends Component {
    render() {
 
       const { pickupId }  = this.props;
-      const { rating } = this.state;
+      const { rating,validInput,invalidMsg } = this.state;
+
+      const msg = (
+         <div class="alert alert-danger" role="alert">
+            {invalidMsg}
+         </div>
+      )
 
       return (
          <div>
@@ -72,6 +80,7 @@ class Feedback extends Component {
                      <Rating rating={rating} handleChange = {this.handleChange} size = {'36px'} />
                   </div>
                </Modal.Body>
+               {validInput? null : msg}
                <Modal.Footer>
                   <Button variant="success" onClick = {e => this.continue(e)}>Submit</Button>
                </Modal.Footer>

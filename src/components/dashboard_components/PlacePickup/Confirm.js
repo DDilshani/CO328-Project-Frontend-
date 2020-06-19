@@ -4,7 +4,8 @@ import { newPickup } from './../UserFunctions';
 
 class Confirm extends Component {
    state = {
-      validServer: true,
+      validInput: true,
+      invalidMsg: '',
    }
 
    getPickupTime(timeState){
@@ -43,13 +44,12 @@ class Confirm extends Component {
                this.setState({validServer :true});
                window.location.href = '/home';
             }
-            else if(statusCode === 'E5000'){
-               console.log('Error')
-               this.setState({validServer : false});
+            else {
+               this.setState({validInput: false, invalidMsg: res.error});
             }
          }
          else{
-            this.setState({validServer: false});
+            console.log('Error')
          }
       })
    }
@@ -61,12 +61,12 @@ class Confirm extends Component {
 
    render(){
       const { values: {phoneNo, address, time} } = this.props;
-      const { validServer} = this.state;
+      const { validInput,invalidMsg} = this.state;
 
-      const invalidServerMsg = (
-         <Alert variant='danger'>
-            Database error!
-         </Alert>
+      const msg = (
+         <div class="alert alert-danger" role="alert">
+            {invalidMsg}
+         </div>
       )
 
       return (
@@ -89,7 +89,7 @@ class Confirm extends Component {
                      <Form.Control type="text" value = {this.getPickupTime(time)} readOnly/>
                   </Form.Group>
                   <br/>
-                  {validServer? null : invalidServerMsg}
+                  {validInput? null : msg}
                   <Button variant="success" type="submit" block>
                      Confirm
                   </Button>

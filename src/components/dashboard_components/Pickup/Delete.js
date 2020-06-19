@@ -10,6 +10,8 @@ class Delete extends Component {
       super()
       this.state = {
          show: false,
+         validInput: true,
+         invalidMsg: '',
       }
    }
 
@@ -33,8 +35,8 @@ class Delete extends Component {
                console.log('Success')
                window.location.href = '/home';
             }
-            else if(statusCode === 'E5000'){
-               console.log('Error')
+            else {
+               this.setState({validInput: false, invalidMsg: res.error});
             }
          }
          else{
@@ -47,6 +49,13 @@ class Delete extends Component {
 
    render() {
       const { pickupId }  = this.props;
+      const {validInput,invalidMsg} = this.state;
+
+      const msg = (
+         <div class="alert alert-danger" role="alert">
+            {invalidMsg}
+         </div>
+      )
 
       return (
          <div>
@@ -60,6 +69,7 @@ class Delete extends Component {
                   Are you sure to delete the pickup #001145
                   <br/>
                </Modal.Body>
+               {validInput? null : msg}
                <Modal.Footer>
                   <Button variant="success" onClick = {e => this.continue(e)}>Delete</Button>
                </Modal.Footer>

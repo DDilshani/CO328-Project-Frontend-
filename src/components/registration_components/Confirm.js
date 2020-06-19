@@ -5,8 +5,8 @@ import { Button, Form,Card, Alert } from 'react-bootstrap';
 export class Confirm extends Component {
 
    state = {
-      validServer: true,
-      validInput : true
+      validInput: true,
+      invalidMsg: '',
    }
 
    continue = e => {
@@ -37,17 +37,12 @@ export class Confirm extends Component {
                this.setState({validInput: true, validServer :true});
                window.location.href = '/login';
             }
-            else if(statusCode === 'E4001'){
-               console.log('Wrong')
-               this.setState({validInput: false, validServer : true});
-            }
-            else if(statusCode === 'E5000'){
-               console.log('Error')
-               this.setState({validInput: true, validServer : false});
+            else {
+               this.setState({validInput: false, invalidMsg: res.error});
             }
          }
          else{
-            this.setState({validServer: false});
+            console.log('Error');
          }
       })
    }
@@ -59,20 +54,14 @@ export class Confirm extends Component {
 
    render() {
 
-      const invalidInputMsg = (
-         <Alert variant='danger'>
-            A user with these account details already exists!
-         </Alert>
-      )
-
-      const invalidServerMsg = (
-         <Alert variant='danger'>
-            Database error!
-         </Alert>
-      )
-
       const { values: {firstName, lastName, phoneNo, email, address1, address2, city} } = this.props;
-      const { validInput, validServer} = this.state;
+      const { validInput, invalidMsg} = this.state;
+
+      const msg = (
+         <div class="alert alert-danger" role="alert">
+            {invalidMsg}
+         </div>
+      )
 
       return (
 
@@ -99,7 +88,7 @@ export class Confirm extends Component {
                         <Form.Control as="textarea" rows='3' value = {address1+ "\n"+address2 + "\n" + city} readOnly/>
                   </Form.Group>
                   <br/>
-                  {validServer? (validInput? null : invalidInputMsg) : invalidServerMsg}
+                  {validInput? null : msg}
                   <Button variant="success" type="submit" block>
                      Confirm & Submit
                   </Button>

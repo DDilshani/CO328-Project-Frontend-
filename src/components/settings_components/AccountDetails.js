@@ -4,21 +4,22 @@ import Table from 'react-bootstrap/Table'
 import { Form ,Button,Alert } from 'react-bootstrap';
 
 class AccountDetails extends Component {
-   state = {
-      step: 1,
-      firstName: '',
-      lastName: '',
-      address1:'',
-      address2:'',
-      city: '',
-      language: '',
-      phoneNo:'',
-      email: '',
-      municipalCouncil: '',
-      prevDetails: null,
-      displayRow : 0,
-      validServer: true,
-   };
+    state = {
+        step: 1,
+        firstName: '',
+        lastName: '',
+        address1:'',
+        address2:'',
+        city: '',
+        language: '',
+        phoneNo:'',
+        email: '',
+        municipalCouncil: '',
+        prevDetails: null,
+        displayRow : 0,
+        validInput: true,
+        invalidMsg: '',
+    };
 
    handleChange = input => e => {
       this.setState({
@@ -28,27 +29,27 @@ class AccountDetails extends Component {
 
 
    handleUserData = () => {
-      getUserData().then(res => {
-         if (res.statusCode==='S2000') {
-            this.setState({prevDetails: res});
-            this.setState({firstName: res.firstName});
-            this.setState({lastName: res.lastName});
-            this.setState({phoneNo: res.phone});
-            this.setState({email: res.email});
-            this.setState({address1: res.address.address1});
-            this.setState({address2: res.address.address2});
-            this.setState({city: res.address.city});
-            this.setState({municipalCouncil: res.address.municipalCouncil});
-            this.setState({language: res.language});
-         }
-         else {
-            this.setState({validServer: false});
-         }
-      }).catch(err => {
-         this.setState({validServer: false})
-         console.log(err)
-      })
-   }
+        getUserData().then(res => {
+            if (res.statusCode==='S2000') {
+                this.setState({validInput: true});
+                this.setState({prevDetails: res});
+                this.setState({firstName: res.firstName});
+                this.setState({lastName: res.lastName});
+                this.setState({phoneNo: res.phone});
+                this.setState({email: res.email});
+                this.setState({address1: res.address.address1});
+                this.setState({address2: res.address.address2});
+                this.setState({city: res.address.city});
+                this.setState({municipalCouncil: res.address.municipalCouncil});
+                this.setState({language: res.language});
+            }
+            else {
+                this.setState({validInput: false, invalidMsg: res.error});
+            }
+        }).catch(err => {
+
+        })
+    }
 
    componentDidMount(){
       this.handleUserData();
@@ -103,44 +104,48 @@ class AccountDetails extends Component {
    applyChanges = e => {
       e.preventDefault();
 
-      const {firstName, lastName, address1, address2, city, municipalCouncil,language} = this.state;
-      const customer = {
-         firstName: firstName,
-         lastName: lastName,
-         address1: address1,
-         address2: address2,
-         city: city,
-         language: language,
-         municipalCouncil: municipalCouncil,
-      }
-      console.log(customer);
-      changeDetails(customer).then(res => {
-         if (res) {
-            let statusCode = res.statusCode;
-            console.log(statusCode);
-            if(statusCode === 'S2000'){
-               console.log('Success')
-               this.setState({validServer :true});
-               window.location.href = '/home';
-            }
-            else if(statusCode === 'E5000'){
-               console.log('Error')
-               this.setState({validServer : false});
-            }
-         }
-         else{
-            console.log('error');
-            this.setState({validServer: false});
-         }
-      })
+        const {firstName, lastName, address1, address2, city, municipalCouncil,language} = this.state;
+        const customer = {
+           firstName: firstName,
+           lastName: lastName,
+           address1: address1,
+           address2: address2,
+           city: city,
+           language: language,
+           municipalCouncil: municipalCouncil,
+        }
+        console.log(customer);
+        changeDetails(customer).then(res => {
+           if (res) {
+              let statusCode = res.statusCode;
+              console.log(statusCode);
+              if(statusCode === 'S1000'){
+                 console.log('Success')
+                 this.setState({validServer :true});
+                 window.location.href = '/home';
+              }
+              else {
+                this.setState({validInput: false, invalidMsg: res.error});
+              }
+           }
+           else{
+                console.log('error');
+           }
+        })
+
+    }
 
    }
 
-   render() {
+        const { validInput,invalidMsg,firstName,lastName, phoneNo, email, municipalCouncil,language ,displayRow,address1,address2,city} = this.state;
+        const full_name = firstName + ' ' + lastName;
+        const address = address1+ ' ' + address2+' ' + city;
 
-      const { validServer,firstName,lastName, phoneNo, email, municipalCouncil,language ,displayRow,address1,address2,city} = this.state;
-      const full_name = firstName + ' ' + lastName;
-      const address = address1+ ' ' + address2+' ' + city;
+        const msg = (
+            <div class="alert alert-danger" role="alert">
+               {invalidMsg}
+            </div>
+         )
 
       const invalidServerMsg = (
          <Alert variant='danger'>
@@ -261,64 +266,64 @@ class AccountDetails extends Component {
 
       return (
 
-         <Table striped borderless hover>
-            <div className="table-header">
-               <h3>Account Details</h3>
-            </div>
-            <tbody>
-               <tr onClick={ () => this.displayRow(1) }>
-                  <td id="td-name">Name: </td>
-                  <td>{full_name}</td>
-                  <td><a href='#' onClick={ () => this.displayRow(1) }>Edit</a></td>
-               </tr>
-               {(displayRow == 1)? updateName : null}
-               <tr id="tr-email">
-                  <td>email: </td>
-                  <td>{email}</td>
-                  <td></td>
-               </tr>
-               <tr id="tr-phone">
-                  <td>Mobile No: </td>
-                  <td>{phoneNo}</td>
-                  <td></td>
-               </tr>
-               <tr onClick={ () => this.displayRow(2) }>
-                  <td id="td-address">Address: </td>
-                  <td>{address}</td>
-                  <td><a href='#' onClick={ () => this.displayRow(2) }>Edit</a></td>
-               </tr>
-               {(displayRow == 2)? updataAddress : null}
-               <tr onClick={ () => this.displayRow(3) }>
-                  <td id="td-municipal">Municipal Council: </td>
-                  <td>{municipalCouncil}</td>
-                  <td><a href='#' onClick={ () => this.displayRow(3) }>Edit</a></td>
-               </tr>
-               {(displayRow == 3)? updateMunicipal : null}
-               <tr onClick={ () => this.displayRow(4) }>
-                  <td id="td-language">language: </td>
-                  <td>{language}</td>
-                  <td><a href='#' onClick={ () => this.displayRow(4) }>Edit</a></td>
-               </tr>
-               {(displayRow == 4)? updateLanguage : null}
-            </tbody>
-            <tr>
-               <td colspan="3">
-                  <div className="alert-block">
-                     {validServer? null : invalidServerMsg}
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td colspan="3">
-                  <div className="btn-block-apply">
-                     <Button variant="success" onClick = {e => this.applyChanges(e)} type="submit" block>
-                        Apply Changes
-                     </Button>
-                     <Button variant="light" onClick={ () => this.resetChanges() } block>
-                        Reset
-                     </Button>
-                  </div>
-               </td>
+                <Table striped borderless hover>
+                <div className="table-header">
+                    <h3>Account Details</h3>
+                </div>
+                <tbody>
+                    <tr onClick={ () => this.displayRow(1) }>
+                        <td id="td-name">Name: </td>
+                        <td>{full_name}</td>
+                        <td><a href='#' onClick={ () => this.displayRow(1) }>Edit</a></td>
+                    </tr>
+                    {(displayRow == 1)? updateName : null}
+                    <tr id="tr-email">
+                        <td>email: </td>
+                        <td>{email}</td>
+                        <td></td>
+                    </tr>
+                    <tr id="tr-phone">
+                        <td>Mobile No: </td>
+                        <td>{phoneNo}</td>
+                        <td></td>
+                    </tr>
+                    <tr onClick={ () => this.displayRow(2) }>
+                        <td id="td-address">Address: </td>
+                        <td>{address}</td>
+                        <td><a href='#' onClick={ () => this.displayRow(2) }>Edit</a></td>
+                    </tr>
+                    {(displayRow == 2)? updataAddress : null}
+                    <tr onClick={ () => this.displayRow(3) }>
+                        <td id="td-municipal">Municipal Council: </td>
+                        <td>{municipalCouncil}</td>
+                        <td><a href='#' onClick={ () => this.displayRow(3) }>Edit</a></td>
+                    </tr>
+                    {(displayRow == 3)? updateMunicipal : null}
+                    <tr onClick={ () => this.displayRow(4) }>
+                        <td id="td-language">language: </td>
+                        <td>{language}</td>
+                        <td><a href='#' onClick={ () => this.displayRow(4) }>Edit</a></td>
+                    </tr>
+                    {(displayRow == 4)? updateLanguage : null}
+                </tbody>
+                <tr>
+                    <td colspan="3">
+                        <div className="alert-block">
+                            {validInput? null : msg}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div className="btn-block-apply">
+                            <Button variant="success" onClick = {e => this.applyChanges(e)} type="submit" block>
+                                Apply Changes
+                            </Button>
+                            <Button variant="light" onClick={ () => this.resetChanges() } block>
+                                Reset
+                            </Button>
+                        </div>
+                    </td>
 
             </tr>
          </Table>

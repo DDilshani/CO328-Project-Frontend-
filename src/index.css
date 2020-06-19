@@ -196,6 +196,16 @@ button:hover{
   font-weight: 600;
  }
 
+ .alert-danger {
+  display: flex;
+  justify-content: center;
+ }
+
+ .modal-body {
+  align-items: center;
+  display: flex;
+ }
+
 
 
 /* ---------------------------------------------------
