@@ -28,23 +28,25 @@ class Confirm extends Component {
    continue = e => {
       e.preventDefault();
 
-      const { values: {phoneNo, time, address} } = this.props;
+      const { values: {phoneNo, time, address,date} } = this.props;
       const pickup = {
          phoneNo: phoneNo,
          time: time,
          address: address,
+         date: date,
       }
 
       newPickup(pickup).then(res => {
          if (res) {
             let statusCode = res.statusCode;
-            console.log(statusCode);
             if(statusCode === 'S2000'){
+               //if(statusCode){
                console.log('Success')
                this.setState({validServer :true});
-               window.location.href = '/home';
+               //window.location.href = '/home';
             }
             else {
+               //console.log('err');
                this.setState({validInput: false, invalidMsg: res.error});
             }
          }

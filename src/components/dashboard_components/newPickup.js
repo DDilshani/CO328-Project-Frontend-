@@ -15,7 +15,22 @@ class NewPickup extends Component {
       phoneNo:'',
       address:'',
       municipalCouncil:'',
+      date:this.formatDate(new Date().toLocaleString()),
    };
+
+   formatDate(date) {
+      var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+      if (month.length < 2)
+      month = '0' + month;
+      if (day.length < 2)
+      day = '0' + day;
+
+      return [year, month, day].join('-');
+   }
 
    nextStep = () => {
       const { step } = this.state;
@@ -53,6 +68,8 @@ class NewPickup extends Component {
    }
 
    render() {
+
+      
       const { step } = this.state;
       const {time, phoneNo, address, date, municipalCouncil} = this.state;
       const values = {time, phoneNo, address, date, municipalCouncil};

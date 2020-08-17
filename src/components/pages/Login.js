@@ -80,7 +80,7 @@ class Login extends Component {
       )
 
       return (
-         <Card>
+         <Card data-testid="login-form">
             <Form onSubmit = {e => this.continue(e)}>
                <Card.Body>
                   <Card.Title className='text-center'>

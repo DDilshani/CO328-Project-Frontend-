@@ -7,9 +7,8 @@ class FormPickupDetails extends Component {
    }
 
    continue (e) {
-      e.preventDefault();
 
-      const {phoneNo, time} = this.props.values
+      const {phoneNo} = this.props.values
       let allow = true;
 
       if(!this.validatePhoneNo(phoneNo)) {
@@ -58,12 +57,12 @@ class FormPickupDetails extends Component {
                   </Card.Title>
                   <Form.Group>
                      <Form.Label>Mobile Number</Form.Label>
-                     <Form.Control type="text" className = {validPhoneNo ? null : invalidClass} defaultValue = {values.phoneNo} onChange = {handleChange('phoneNo')} required/>
+                     <Form.Control data-testid="phoneNo" type="text" className = {validPhoneNo ? null : invalidClass} defaultValue = {values.phoneNo} onChange = {handleChange('phoneNo')} required/>
                      {validPhoneNo ? null : invalidPhoneNoMsg}
                   </Form.Group>
                   <Form.Group>
                      <Form.Label>Address</Form.Label>
-                     <Form.Control as="textarea" rows='3' defaultValue={values.address} onChange = {handleChange('adress')} required/>
+                     <Form.Control data-testid="address" as="textarea" rows='3' defaultValue={values.address} onChange = {handleChange('address')} required/>
                      <Form.Text className="text-muted text-alert">
                         Your services are limited to {values.municipalCouncil} municipal council.
                      </Form.Text>
