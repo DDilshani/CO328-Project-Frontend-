@@ -81,7 +81,7 @@ class FormDevVerification extends Component {
                   </Form.Group>
                   <br />
                   <Card.Text>
-                     The device verification code has been sent to you when you registered your mobile number using SMS. (Use the token 100100) for demo accounts. 
+                     The device verification code has been sent to you when you registering to the Collector app via SMS. (Use the token 100100 for demo accounts). 
                   </Card.Text>
                   {validInput? (validToken? null : invalidTokenMsg) : invalidInputMsg}
                   <Button variant="success" type="submit" block>
