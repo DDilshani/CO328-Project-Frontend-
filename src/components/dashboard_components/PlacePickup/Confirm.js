@@ -43,7 +43,7 @@ class Confirm extends Component {
                //if(statusCode){
                console.log('Success')
                this.setState({validServer :true});
-               //window.location.href = '/home';
+               window.location.href = '/home';
             }
             else {
                //console.log('err');
