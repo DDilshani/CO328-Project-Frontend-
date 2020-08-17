@@ -62,7 +62,7 @@ class FormPickupDetails extends Component {
                   </Form.Group>
                   <Form.Group>
                      <Form.Label>Address</Form.Label>
-                     <Form.Control data-testid="address" as="textarea" rows='3' defaultValue={values.address} onChange = {handleChange('adress')} required/>
+                     <Form.Control data-testid="address" as="textarea" rows='3' defaultValue={values.address} onChange = {handleChange('address')} required/>
                      <Form.Text className="text-muted text-alert">
                         Your services are limited to {values.municipalCouncil} municipal council.
                      </Form.Text>

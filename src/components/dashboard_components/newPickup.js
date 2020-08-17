@@ -53,14 +53,14 @@ class NewPickup extends Component {
    }
 
    handleUserData = () => {
-      /*getUserData().then(res => {
+      getUserData().then(res => {
          if (res.statusCode==='S2000') {
             this.setState({phoneNo: res.phone});
             let address = res.address.address1 + ' ' + res.address.address2 + ' ' + res.address.city;
             this.setState({address: address});
             this.setState({municipalCouncil: res.address.municipalCouncil});
          }
-      })*/
+      })
    }
 
    componentDidMount(){
