@@ -287,12 +287,6 @@ class AccountDetails extends Component {
                         <td><a href='#' onClick={ () => this.displayRow(2) }>Edit</a></td>
                     </tr>
                     {(displayRow == 2)? updataAddress : null}
-                    <tr onClick={ () => this.displayRow(3) }>
-                        <td id="td-municipal">Municipal Council: </td>
-                        <td>{municipalCouncil}</td>
-                        <td><a href='#' onClick={ () => this.displayRow(3) }>Edit</a></td>
-                    </tr>
-                    {(displayRow == 3)? updateMunicipal : null}
                     <tr onClick={ () => this.displayRow(4) }>
                         <td id="td-language">language: </td>
                         <td>{language}</td>
