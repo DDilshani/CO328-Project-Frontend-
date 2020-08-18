@@ -7,71 +7,71 @@ import Settings_mobile from '../settings_components/Settings_mobile'
 
 class Settings extends Component {
 
-    state = {
-        step: 1,
-        mobileWindow: false,
-    }
+   state = {
+      step: 1,
+      mobileWindow: false,
+   }
 
-    nextStep = (step) => {
-        this.setState({
-           step: step
-        });
-    }
+   nextStep = (step) => {
+      this.setState({
+         step: step
+      });
+   }
 
-     updateDimensions() {
-        if(window.innerWidth < 500) {
-            this.setState({mobileWindow: true});
-        }
-        else{
-            this.setState({mobileWindow: false});
-        }
+   updateDimensions() {
+      if(window.innerWidth < 500) {
+         this.setState({mobileWindow: true});
       }
-
-      componentDidMount() {
-        this.updateDimensions();
-        window.addEventListener("resize", this.updateDimensions.bind(this));
+      else{
+         this.setState({mobileWindow: false});
       }
+   }
 
-      componentWillUnmount() {
-        window.removeEventListener("resize", this.updateDimensions.bind(this));
-      }
+   componentDidMount() {
+      this.updateDimensions();
+      window.addEventListener("resize", this.updateDimensions.bind(this));
+   }
+
+   componentWillUnmount() {
+      window.removeEventListener("resize", this.updateDimensions.bind(this));
+   }
 
 
-    render() {
-        const { step,mobileWindow } = this.state;
-        switch(step) {
-            case 1:
-                if(mobileWindow) {
-                    return (
-                        <div className="settings">
-                            <Settings_mobile />
-                        </div>
-                    )
-
-                }
-                else {
-                    return (
-                        <div className="settings">
-                            <Sidebar nextStep = {this.nextStep} />
-                            <div className="content" id="content-id">
-                                <AccountDetails />
-                            </div>
-                        </div>
-                    )                   
-                }
-
-            case 2:
-                return (
-                    <div className="settings">
-                        <Sidebar nextStep = {this.nextStep} />
-                        <div className="content" id="content-id">
-                            <PrivacyDetails />
-                        </div>
-                    </div>
-                )
+   render() {
+      const { step,mobileWindow } = this.state;
+      switch(step) {
+         case 1:
+         if(mobileWindow) {
+            return (
+               <div className="settings">
+                  <Settings_mobile />
+               </div>
+            )
 
          }
-     }
+         else {
+            return (
+               <div className="settings">
+                  <Sidebar nextStep = {this.nextStep} />
+                  <div className="content" id="content-id">
+                     <AccountDetails />
+                  </div>
+               </div>
+            )
+         }
+
+         case 2:
+         return (
+            <div className="settings">
+               <Sidebar nextStep = {this.nextStep} />
+               <div className="content" id="content-id">
+                  <PrivacyDetails />
+               </div>
+            </div>
+         )
+
+      }
+   }
 }
 
 export default Settings;
