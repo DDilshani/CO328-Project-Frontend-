@@ -265,10 +265,6 @@ class AccountDetails_mobile extends Component {
                         <td>Change address</td>
                     </tr>
                     {(displayRow == 2)? updataAddress : null}
-                    <tr onClick={ () => this.displayRow(3) }>
-                        <td>Change municipal council</td>
-                    </tr>
-                    {(displayRow == 3)? updateMunicipal : null}
                     <tr onClick={ () => this.displayRow(4) }>
                         <td>Change language</td>
                     </tr>

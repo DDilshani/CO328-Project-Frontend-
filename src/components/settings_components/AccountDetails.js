@@ -259,7 +259,6 @@ class AccountDetails extends Component {
 
 
       return (
-
          <Table striped borderless hover>
             <div className="table-header">
                <h3>Account Details</h3>

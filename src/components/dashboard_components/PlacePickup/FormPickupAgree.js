@@ -24,11 +24,10 @@ class FormPickupAgree extends Component {
                      </Card.Title>
                      <b>Your order will be picked up within 3 days.</b>
                      <Card.Text>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                        It has survived not only five centuries, but also the leap into electronic typesetting,
-                        remaining essentially unchanged.
+                     Your pickup will be accepeted by Zero Trash center after a one hour
+                        of scheduling.
+                        The scheduled pickup can be canceled if the pick is not allocated 
+                        to a collector.
                      </Card.Text>
                      <br />
                      <Button variant="success" type="submit" block>
