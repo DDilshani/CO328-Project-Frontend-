@@ -31,20 +31,20 @@ class Dashboard extends Component {
    handleListItems = () => {
       getListItems().then(res => {
          if (res.statusCode==='S2000') {
-            let list = [];
-            for(let i=0; i<res.data.length;++i){
-               let date = res.data[i].placedOn.split(" ");
-               let time = this.getPickupTime(res.data[i].timeSlot);
-               let item = {
-                  pickupState: res.data[i].state,
-                  pickupId: parseInt(res.data[i].id),
-                  pickupDate: date[0],
-                  pickupTime: time,
-                  rating: parseInt(res.data[i].rating)
+               let list = [];
+               for(let i=0; i<res.data.length;++i){
+                  let date = res.data[i].placedOn.split(" ");
+                  let time = this.getPickupTime(res.data[i].timeSlot);
+                  let item = {
+                     pickupState: res.data[i].state,
+                     pickupId: parseInt(res.data[i].id),
+                     pickupDate: date[0],
+                     pickupTime: time,
+                     rating: parseInt(res.data[i].rating)
+                  }
+                  list.push(item);
                }
-               list.push(item);
-            }
-            this.setState({list: list});
+               this.setState({list: list});
          }
       })
    }
@@ -69,7 +69,7 @@ class Dashboard extends Component {
                         <Link to="../newPickup">
                            <div style={{display: "flex",justifyContent: "center",alignItems: "center"}}>
                               <div>
-                                 <Image size={200}></Image>
+                                 <Image size={200} />
                                  <br/>
                                  <h5 align="center">Schedule a Pickup</h5>
                               </div>
@@ -80,11 +80,15 @@ class Dashboard extends Component {
                      <Col>
                         <b>Instructions to Schedule a Pickup</b>
                         <br></br>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                        It has survived not only five centuries, but also the leap into electronic typesetting,
-                        remaining essentially unchanged.
+                        <ul>
+                           <li>Click this to schedule a pickup</li>
+                           <li>Enter the requesting information</li>
+                           <li>Confirm and Submit pickup</li>
+                        </ul>
+                        Your pickup will be accepeted by Zero Trash center after a one hour
+                        of scheduling.
+                        The scheduled pickup can be canceled if the pick is not allocated 
+                        to a collector.
                      </Col>
                   </Row>
                   <br></br>

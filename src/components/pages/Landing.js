@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 class Landing extends Component {
 
+
    componentDidMount(){
       // Redirect to requested URL
       const queryString = window.location.search;

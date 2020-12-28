@@ -4,7 +4,8 @@ import { newPickup } from './../UserFunctions';
 
 class Confirm extends Component {
    state = {
-      validServer: true,
+      validInput: true,
+      invalidMsg: '',
    }
 
    getPickupTime(timeState){
@@ -27,29 +28,30 @@ class Confirm extends Component {
    continue = e => {
       e.preventDefault();
 
-      const { values: {phoneNo, time, address} } = this.props;
+      const { values: {phoneNo, time, address,date} } = this.props;
       const pickup = {
          phoneNo: phoneNo,
          time: time,
          address: address,
+         date: date,
       }
 
       newPickup(pickup).then(res => {
          if (res) {
             let statusCode = res.statusCode;
-            console.log(statusCode);
             if(statusCode === 'S2000'){
+               //if(statusCode){
                console.log('Success')
                this.setState({validServer :true});
                window.location.href = '/home';
             }
-            else if(statusCode === 'E5000'){
-               console.log('Error')
-               this.setState({validServer : false});
+            else {
+               //console.log('err');
+               this.setState({validInput: false, invalidMsg: res.error});
             }
          }
          else{
-            this.setState({validServer: false});
+            console.log('Error')
          }
       })
    }
@@ -61,12 +63,12 @@ class Confirm extends Component {
 
    render(){
       const { values: {phoneNo, address, time} } = this.props;
-      const { validServer} = this.state;
+      const { validInput,invalidMsg} = this.state;
 
-      const invalidServerMsg = (
-         <Alert variant='danger'>
-            Database error!
-         </Alert>
+      const msg = (
+         <div class="alert alert-danger" role="alert">
+            {invalidMsg}
+         </div>
       )
 
       return (
@@ -89,7 +91,7 @@ class Confirm extends Component {
                      <Form.Control type="text" value = {this.getPickupTime(time)} readOnly/>
                   </Form.Group>
                   <br/>
-                  {validServer? null : invalidServerMsg}
+                  {validInput? null : msg}
                   <Button variant="success" type="submit" block>
                      Confirm
                   </Button>
