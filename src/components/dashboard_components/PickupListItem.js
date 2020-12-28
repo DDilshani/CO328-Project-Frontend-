@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, Table } from 'react-bootstrap';
 
 import Feedback from './Pickup/Feedback';
 import Delete from './Pickup/Delete';
@@ -10,44 +9,50 @@ class PickupListItem extends Component {
 
    renderPickupState(s){
       switch(s) {
-         case 'AWAITING':
+         case 'PENDING':
          return <td className="await">Awaiting Pickup</td>;
-         case 'COMPLETED':
-         return <td className="complete">Completed</td>;
-         case 'INCOMPLETED':
-         return <td className="incomplete">Incompleted</td>;
-      }
-   }
+            case 'COMPLETED':
+            return (<td className="complete">Completed</td>);
+               case 'INCOMPLETED':
+               return (<td className="incomplete">Incompleted</td>);
+               }
+            }
 
-   renderPickupOption(s, pickupId){
-      if(this.props.pickupState==='AWAITING'){
-         return <Delete pickupId={pickupId}/>
-      }else{
-         return <Feedback pickupId={pickupId}></Feedback>
-      }
-   }
-   render() {
-      const pickupId = this.props.pickupId;
-      const pickupTime = this.props.pickupTime;
-      const pickupDate = this.props.pickupDate;
+            renderPickupOption(s, pickupId, rating){
+               if(this.props.pickupState==='PENDING'){
+                  return <Delete pickupId={pickupId}/>
+               }else if(rating!="null"){
+                  // Not rated
+                  return <Feedback pickupId={pickupId}></Feedback>
+               //}else{
+               //    already rated
+               //   return <p>Rating: {rating}</p>
+               }
+            }
+            render() {
+               const pickupId = this.props.pickupId;
+               const pickupTime = this.props.pickupTime;
+               const pickupDate = this.props.pickupDate;
+               const pickupState = this.props.pickupState;
+               const pickupRating = this.props.rating;
 
-      const pickupState = this.props.pickupState;
+               return (
+                  <tr>
+                     {this.renderPickupState(pickupState)}
+                     <td><b>{pickupDate}</b><br/><small>{pickupTime}</small></td>
+                     <td>{this.renderPickupOption(pickupState,pickupId, pickupRating)} </td>
+                  </tr>
+               );
+            }
+         }
 
-      return (
-         <tr>
-         {this.renderPickupState(pickupState)}
-         <td><b>{pickupDate}</b><br/><small>{pickupTime}</small></td>
-         <td>{this.renderPickupOption(pickupState,pickupId)} </td>
-         </tr>
-      );
-   }
-}
+         Feedback.propTypes = {
+            pickupId: PropTypes.number.isRequired,
+            pickupId: PropTypes.string.isRequired,
+            pickupState: PropTypes.string.isRequired,
+            pickupTime:PropTypes.string.isRequired,
+            pickupDate:PropTypes.string.isRequired,
+            rating: PropTypes.number.isRequired,
+         }
 
-Feedback.propTypes = {
-   pickupId: PropTypes.number.isRequired,
-   pickupState: PropTypes.string.isRequired,
-   pickupTime:PropTypes.string.isRequired,
-   pickupDate:PropTypes.string.isRequired,
-}
-
-export default PickupListItem;
+         export default PickupListItem;

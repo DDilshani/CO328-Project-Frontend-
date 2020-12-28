@@ -4,9 +4,58 @@ import { Link } from 'react-router-dom';
 
 import Image from 'react-icons/lib/fa/image';
 import PickupListItem from './PickupListItem';
+import { getListItems } from './UserFunctions';
 
 class Dashboard extends Component {
+
+   state = {
+      list : [],
+   }
+   getPickupTime(timeState){
+      switch(timeState) {
+         case '8':
+         return '8:00 a.m. - 10:00 a.m.';
+         case '10':
+         return '10:00 a.m. - 12:00 p.m.';
+         case '12':
+         return '12:00 p.m. - 2:00 p.m.';
+         case '14':
+         return '2:00 p.m. - 4:00 p.m.';
+         case '16':
+         return '4:00 p.m. - 6:00 p.m.';
+         case '18':
+         return '6:00 p.m. - 8:00 p.m.';
+      }
+   }
+
+   handleListItems = () => {
+      getListItems().then(res => {
+         if (res.statusCode==='S2000') {
+            let list = [];
+            for(let i=0; i<res.data.length;++i){
+               let date = res.data[i].placedOn.split(" ");
+               let time = this.getPickupTime(res.data[i].timeSlot);
+               let item = {
+                  pickupState: res.data[i].state,
+                  pickupId: parseInt(res.data[i].id),
+                  pickupDate: date[0],
+                  pickupTime: time,
+                  rating: parseInt(res.data[i].rating)
+               }
+               list.push(item);
+            }
+            this.setState({list: list});
+         }
+      })
+   }
+
+   componentDidMount(){
+      this.handleListItems();
+   }
+
    render() {
+
+      var { list } = this.state;
 
       return (
          <div>
@@ -48,29 +97,15 @@ class Dashboard extends Component {
                            <br/>
                            <Table responsive striped >
                               <tbody>
-                                 <PickupListItem
-                                    pickupState="AWAITING"
-                                    pickupId="1000"
-                                    pickupDate="01/04/2020"
-                                    pickupTime="8.00 AM - 10.00 PM" />
-
-                                 <PickupListItem
-                                    pickupState="COMPLETED"
-                                    pickupId="1001"
-                                    pickupDate="09/03/2020"
-                                    pickupTime="4.00 PM - 6.00 PM" />
-
-                                 <PickupListItem
-                                    pickupState="INCOMPLETED"
-                                    pickupId="1002"
-                                    pickupDate="06/03/2020"
-                                    pickupTime="2.00 PM - 4.00 PM" />
-
-                                 <PickupListItem
-                                    pickupState="COMPLETED"
-                                    pickupId="1003"
-                                    pickupDate="09/03/2020"
-                                    pickupTime="4.00 PM - 6.00 PM" />
+                                 {list.map(function(item, i){
+                                    return <PickupListItem
+                                       pickupState={item.pickupState}
+                                       pickupId={item.pickupId}
+                                       pickupDate={item.pickupDate}
+                                       pickupTime={item.pickupTime}
+                                       rating={item.rating}
+                                       key={i}/>;
+                                 })}
                               </tbody>
                            </Table>
                         </div>

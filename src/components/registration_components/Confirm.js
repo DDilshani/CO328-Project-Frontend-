@@ -96,8 +96,8 @@ export class Confirm extends Component {
                      <Form.Control type="text" value = {phoneNo} readOnly/>
                   </Form.Group>
                   <Form.Group>
-                     <Form.Label>Address</Form.Label>
-                     <Form.Control type="text"  value = {address1+ ", "+address2 + ", " + city} readOnly/>
+                        <Form.Label>Address</Form.Label>
+                        <Form.Control as="textarea" rows='3' value = {address1+ "\n"+address2 + "\n" + city} readOnly/>
                   </Form.Group>
                   <br/>
                   {validServer? (validInput? null : invalidInputMsg) : invalidServerMsg}

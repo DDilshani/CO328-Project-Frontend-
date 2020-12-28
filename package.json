@@ -7,6 +7,7 @@
       "@testing-library/react": "^9.5.0",
       "@testing-library/user-event": "^7.2.1",
       "axios": "^0.19.2",
+      "beauty-stars": "^1.1.0",
       "bootstrap": "^4.4.1",
       "postinstall": "^0.7.0",
       "react": "^16.13.1",
@@ -23,10 +24,10 @@
       "deploy": "gh-pages -d build",
       "start": "react-scripts start",
       "build": "react-scripts build",
-      "test": "react-scripts test",
+      "test": "react-scripts test --passWithNoTests",
       "eject": "react-scripts eject"
    },
-   "proxy": "http://68.183.188.135:5000",
+   "proxy": "https://collector.ceykod.com/",
    "homepage": "http://collectorapp.ceykod.com/",
    "eslintConfig": {
       "extends": "react-app"
