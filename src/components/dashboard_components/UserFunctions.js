@@ -6,7 +6,7 @@ export const getUserToken = () => {
 	if (!tokenStr) {
       window.location.href = '/login';
    }
-   
+
 	const token = JSON.parse(tokenStr)
 	const current_time = new Date()
 	if (current_time.getTime() > token.expiry) {
@@ -33,7 +33,8 @@ export const newPickup = pickup => {
       address: pickup.address,
       datatime: pickup.date,
    };
-   return fetch('https://collector.ceykod.com/api/v1/pickups/new/', {
+
+   return fetch('https://localhost/api/v1/pickups/new/', {
       method: 'POST',
       headers: {
          'Authorization': bearer,
@@ -53,7 +54,7 @@ export const getUserData = () => {
    let userToken = getUserToken();
    let bearer = 'Bearer ' + userToken;
    //let bearer = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpZCI6IjEwMDI1IiwidGVsZSI6IjA3NjM5MTQwOTQifQ.WNgiEU-_GLzg6hFeeC9a35NzrnXCQsHYxc6DBOdBaGKhQlPgdw2YLNimLfwazLr_xlpsMCm-UA866utPuekLZm1Pl2UbIncwnlniwBGi9GPk0Xd0nm3JAVNS_gcLLlYbfni0QyTGIDlATg5N5dnb-lYaHCxO6wqBfOCevsUic6w';
-        
+  
    return fetch(global.config.backend + '/api/v1/getUserData/', {
       method: 'GET',
       headers: {
